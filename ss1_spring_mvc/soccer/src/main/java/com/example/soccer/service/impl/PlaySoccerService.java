@@ -19,12 +19,16 @@ public class PlaySoccerService implements IPlaySoccerService {
     }
 
     @Override
-    public SoccerPlayer removePlayer(String playerId) {
-        return null;
+    public boolean removePlayer(Integer id) {
+        if (this.playerRepository.removePlayer(id)) {
+            return true;
+        }
+        ;
+        return false;
     }
 
     @Override
-    public List<SoccerPlayer> findById(String playerId) {
-        return null;
+    public SoccerPlayer findById(Integer id) {
+        return this.playerRepository.findById(id);
     }
 }

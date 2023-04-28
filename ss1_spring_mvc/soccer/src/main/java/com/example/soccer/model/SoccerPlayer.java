@@ -1,6 +1,7 @@
 package com.example.soccer.model;
 
 public class SoccerPlayer {
+    private Integer id;
     private String code;
     private String name;
     private String dateOfBirth;
@@ -11,8 +12,9 @@ public class SoccerPlayer {
     public SoccerPlayer() {
     }
 
-    public SoccerPlayer(String code, String name, String dateOfBirth, String experience,
+    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, String experience,
                         String position, String urlImg) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -23,6 +25,14 @@ public class SoccerPlayer {
 
     public String getCode() {
         return code;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setCode(String code) {

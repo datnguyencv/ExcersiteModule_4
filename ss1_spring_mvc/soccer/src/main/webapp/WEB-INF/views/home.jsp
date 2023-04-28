@@ -7,8 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 <head>
     <title>Soccer Player</title>
     <!-- Required meta tags -->
@@ -21,62 +22,68 @@
 </head>
 <body>
 <div class="container-fluid">
-<h3 class="text-center text-danger">PlaySoccer Management</h3>
-<table class="table table-striped able-bordered table-hover align-content-center">
-    <thead>
-    <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Date Of Birth</th>
-        <th>Experience</th>
-        <th>Position</th>
-        <th>Avatar</th>
-        <th>Options</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${playList}" var="play">
-    <tr>
-        <td>${play.code}</td>
-        <td>${play.name}</td>
-        <td>${play.dateOfBirth}</td>
-        <td>${play.experience}</td>
-        <td>${play.position}</td>
-        <td><img src=" ${play.urlImg}" width="120px" alt="Error Loading.."></td>
-        <td><!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#delete">
-                Delete
-            </button>
-            </td>
-        <td><!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#detail">
-                Details
-            </button>
+    <h3 class="text-center text-danger">PlaySoccer Management</h3>
+    <table class="table table-striped able-bordered table-hover align-content-center">
+        <thead>
 
-           </td>
-    </tr>
-   </c:forEach>
-    </tbody>
-</table>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Experience</th>
+            <th>Position</th>
+            <th>Avatar</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${playList}" var="play">
+            <tr>
+                <td>${play.code}</td>
+                <td>${play.name}</td>
+                <td>${play.dateOfBirth}</td>
+                <td>${play.experience}</td>
+                <td>${play.position}</td>
+                <td><img src=" ${play.urlImg}" width="120px" alt="Error Loading.."></td>
+                <td><!-- Button trigger modal -->
+                    <button type="button" onclick="info(${play.id},'${play.name}')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete">
+                        Delete
+                    </button>
+                </td>
+                <td><!-- Button trigger modal -->
+                    <button type="button"
+                            onclick="infoDetail(${play.id},'${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')"
+<%--                            onclick="infoDetail(${play.id},'${fn:escapeXml(play.code)}','${fn:escapeXml(play.name)}','${fn:escapeXml(play.dateOfBirth)}','${fn:escapeXml(play.experience)}','${fn:escapeXml(play.position)}','${fn:escapeXml(play.imgUrl)}')"--%>
+                            class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detail">
+                        Details
+                    </button>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 <!-- Modal - Delete-->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Action Delete Box</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Do you want to delete this <span id="nameId" class="text-danger"></span> ?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Delete</button>
-            </div>
+            <form action="/delete" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Action Delete Box</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input hidden type="text" id="idDelete" name="idDelete">
+                    Do you want to delete this <span id="nameDelete" class="text-danger"></span> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -94,10 +101,13 @@
             </div>
             <div class="modal-body">
                 <div class="card" style="background-color:cadetblue; border-color:darkblue;">
-                    <img class="card-img-top" src="" alt="">
+                    <img class="card-img-top" id="img"  alt="">
                     <div class="card-body">
-                        <h4 class="card-title">Title</h4>
-                        <p class="card-text">Text</p>
+                        <h4 class="card-title align-content-center font-weight-bold"> <span id="name"></span></h4>
+                        <p class="card-text align-content-center font-weight-bold"> Code: <span id="code"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Date Of Birth:<span id="dob"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Experience:<span id="exp"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Position: <span id="pos"></span></p>
                     </div>
                 </div>
             </div>
@@ -107,6 +117,26 @@
         </div>
     </div>
 </div>
+<script>
+    function info(id,name) {
+    document.getElementById("idDelete").value = id;
+    document.getElementById("nameDelete").innerText = name;
+    }
+
+    function infoDetail(id, code, name, dateOfBirth, experience, position, urlImg) {
+        // Get the modal element
+        var modal = document.getElementById("detail");
+
+        // Set the modal content with the passed details
+        modal.querySelector(".modal-body #code").textContent = code;
+        modal.querySelector(".modal-body #name").textContent = name;
+        modal.querySelector(".modal-body #dob").textContent = dateOfBirth;
+        modal.querySelector(".modal-body #exp").textContent = experience;
+        modal.querySelector(".modal-body #pos").textContent = position;
+        modal.querySelector(".modal-body #img").src = urlImg;
+    }
+</script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

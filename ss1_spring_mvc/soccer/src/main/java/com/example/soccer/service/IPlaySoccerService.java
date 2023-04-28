@@ -7,7 +7,7 @@ import java.util.List;
 public interface IPlaySoccerService {
     List<SoccerPlayer> findAll();
 
-    SoccerPlayer removePlayer(String playerId);
+    boolean removePlayer(Integer id);
 
-    List<SoccerPlayer> findById(String playerId);
+    SoccerPlayer findById(Integer id);
 }
