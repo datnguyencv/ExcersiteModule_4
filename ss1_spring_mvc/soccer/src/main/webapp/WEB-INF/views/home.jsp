@@ -35,18 +35,77 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${listPlay}" var="list">
+    <c:forEach items="${playList}" var="play">
     <tr>
-        <td>${list.code}</td>
-        <td>${list.name}</td>
-        <td>${list.dateOfBirth}</td>
-        <td>${list.experience}</td>
-        <td>${list.position}</td>
-        <td><img src=" ${list.urlImg}" width="120px" alt="Error Loading.."></td>
+        <td>${play.code}</td>
+        <td>${play.name}</td>
+        <td>${play.dateOfBirth}</td>
+        <td>${play.experience}</td>
+        <td>${play.position}</td>
+        <td><img src=" ${play.urlImg}" width="120px" alt="Error Loading.."></td>
+        <td><!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#delete">
+                Delete
+            </button>
+            </td>
+        <td><!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#detail">
+                Details
+            </button>
+
+           </td>
     </tr>
    </c:forEach>
     </tbody>
 </table>
+</div>
+<!-- Modal - Delete-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Action Delete Box</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete this <span id="nameId" class="text-danger"></span> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal - Detail -->
+<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail more box</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card" style="background-color:cadetblue; border-color:darkblue;">
+                    <img class="card-img-top" src="" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Text</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

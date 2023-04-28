@@ -24,11 +24,11 @@
         <table class="table table-striped table-inverse table-responsive">
             <tr>
                 <th><label>Nhập số tiền USD</label></th>
-                <th><input type="number" name="usd"></th>
+                <th><input type="number" name="usd" value="usd"></th>
             </tr>
             <tr>
                 <th><label>Nhập tỉ giá</label></th>
-                <th><input type="number" name="vnd"></th>
+                <th><input type="number" name="vnd" value="vnd"></th>
             </tr>
             <tr>
                 <th></th>

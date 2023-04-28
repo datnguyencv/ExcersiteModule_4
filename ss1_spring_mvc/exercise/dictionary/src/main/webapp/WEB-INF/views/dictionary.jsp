@@ -34,7 +34,7 @@
                 </th>
             </tr>
             <tr>
-                <th colspan="2">Kết quả: <span style="color: darkblue; font-size: large"> ${result} </span></th>
+                <th colspan="2">Result: <span style="color: darkblue; font-size: large"> ${result} </span></th>
             </tr>
         </table>
     </fieldset>

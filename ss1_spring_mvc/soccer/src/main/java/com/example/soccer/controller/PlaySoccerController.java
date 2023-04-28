@@ -13,7 +13,7 @@ public class PlaySoccerController {
 
     @GetMapping("/")
     private String showAll(Model model) {
-        model.addAttribute("listPlay", this.playSoccerService.findAll());
+        model.addAttribute("playList", this.playSoccerService.findAll());
         model.addAttribute("msg", "Hello World");
         return "home";
     }

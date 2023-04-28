@@ -17,4 +17,14 @@ public class PlaySoccerService implements IPlaySoccerService {
     public List<SoccerPlayer> findAll() {
         return this.playerRepository.findAll();
     }
+
+    @Override
+    public SoccerPlayer removePlayer(String playerId) {
+        return null;
+    }
+
+    @Override
+    public List<SoccerPlayer> findById(String playerId) {
+        return null;
+    }
 }
