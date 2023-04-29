@@ -23,10 +23,11 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compileOnly('javax.servlet:javax.servlet-api:4.0.1')
-    implementation('org.hibernate:hibernate-core:5.6.1.Final')
-
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation group: 'org.springframework', name: 'spring-core', version: '4.3.17.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-context', version: '4.3.17.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '4.3.17.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-web', version: '4.3.17.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '4.3.17.RELEASE'
 }
 
 test {
