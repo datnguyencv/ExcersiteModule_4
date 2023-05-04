@@ -21,7 +21,7 @@ public class CalculatorService implements ICalculatorService {
     }
 
     @Override
-    public double division(int numberOne, int numberTwo) {
+    public double division(double numberOne, double numberTwo) {
         return numberOne / numberTwo;
     }
 }

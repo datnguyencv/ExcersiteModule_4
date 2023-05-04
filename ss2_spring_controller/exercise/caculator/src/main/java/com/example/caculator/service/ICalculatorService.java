@@ -7,5 +7,5 @@ public interface ICalculatorService {
 
     int multiplication(int numberOne, int numberTwo);
 
-    double division(int numberOne, int numberTwo);
+    double division(double numberOne, double numberTwo);
 }
