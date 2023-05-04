@@ -19,12 +19,8 @@ public class PlaySoccerService implements IPlaySoccerService {
     }
 
     @Override
-    public boolean removePlayer(Integer id) {
-        if (this.playerRepository.removePlayer(id)) {
-            return true;
-        }
-        ;
-        return false;
+    public void removePlayer(Integer id) {
+        this.playerRepository.removePlayer(id);
     }
 
     @Override

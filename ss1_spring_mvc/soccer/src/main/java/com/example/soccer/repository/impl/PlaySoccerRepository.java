@@ -43,17 +43,15 @@ public class PlaySoccerRepository implements IPlaySoccerRepository {
     }
 
     @Override
-    public boolean removePlayer(Integer id) {
-        if (playList.remove(findById(id))){
-            return true;
-        };  return false;
+    public void removePlayer(Integer id) {
+        playList.remove(findById(id));
     }
 
     @Override
     public SoccerPlayer findById(Integer id) {
-        for (int i = 0; i < playList.size(); i++) {
-            if (playList.get(i).getId().equals(id)) {
-                return playList.get(i);
+        for (SoccerPlayer soccerPlayer : playList) {
+            if (soccerPlayer.getId().equals(id)) {
+                return soccerPlayer;
             }
         }
         return null;

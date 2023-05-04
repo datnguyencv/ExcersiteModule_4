@@ -23,11 +23,8 @@ public class PlaySoccerController {
 
     @PostMapping("/delete")
     private void delete(@RequestParam("idDelete") Integer id, RedirectAttributes redirectAttributes) {
-        if (this.playSoccerService.removePlayer(id)){
+        this.playSoccerService.removePlayer(id);
             redirectAttributes.addFlashAttribute("message", "Delete Success");
-        } else {
-            redirectAttributes.addFlashAttribute("message", "Do Not Delete. Not Found");
-        }
     }
 
     @GetMapping("/details")
