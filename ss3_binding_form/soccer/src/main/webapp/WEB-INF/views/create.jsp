@@ -13,6 +13,7 @@
     }
 </style>
 <body>
+
 <form:form action="/create" method="post" modelAttribute="soccerPlayer">
     <label>Code</label>
     <form:input path="code" type="text"/><br>
