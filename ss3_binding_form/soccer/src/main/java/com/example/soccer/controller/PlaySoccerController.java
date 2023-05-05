@@ -1,12 +1,11 @@
 package com.example.soccer.controller;
 
+import com.example.soccer.model.SoccerPlayer;
 import com.example.soccer.service.IPlaySoccerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -36,5 +35,28 @@ public class PlaySoccerController {
         return "home";
     }
 
+    @GetMapping("/create")
+    public String showCreateSoccerPlayer(Model model) {
+        model.addAttribute("soccerPlayer", new SoccerPlayer());
+        return "/create";
+    }
+
+    @PostMapping("/create")
+    public String createSoccerPlayer(@ModelAttribute SoccerPlayer soccerPlayer) {
+        playSoccerService.create(soccerPlayer);
+        return "redirect:/soccer-player";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateSoccerPlayer(@PathVariable("id") int id, Model model) {
+        model.addAttribute("soccerPlayer", playSoccerService.findById(id));
+        return "/update";
+    }
+
+    @PostMapping("/update")
+    public String updateSoccerPlayer(@ModelAttribute SoccerPlayer soccerPlayer) {
+        playSoccerService.update(soccerPlayer);
+        return "redirect:/soccer-player";
+    }
     
 }

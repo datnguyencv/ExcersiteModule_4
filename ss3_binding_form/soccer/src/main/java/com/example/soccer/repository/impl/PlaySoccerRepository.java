@@ -59,14 +59,25 @@ public class PlaySoccerRepository implements IPlaySoccerRepository {
         return null;
     }
 
+
     @Override
-    public boolean createPlayer(SoccerPlayer player) {
-        return playList.add(player);
+    public void create(SoccerPlayer soccerPlayer) {
+        soccerPlayer.setId(playList.size() + 1);
+        playList.add(soccerPlayer);
     }
 
     @Override
-    public boolean updatePlayer(SoccerPlayer player) {
-        return playList.add(player);
+    public void update(SoccerPlayer soccerPlayer) {
+        for (SoccerPlayer upSoccerPlayer : playList) {
+            if (upSoccerPlayer.getId() == soccerPlayer.getId()) {
+                upSoccerPlayer.setCode(soccerPlayer.getCode());
+                upSoccerPlayer.setName(soccerPlayer.getName());
+                upSoccerPlayer.setDateOfBirth(soccerPlayer.getDateOfBirth());
+                upSoccerPlayer.setExperience(soccerPlayer.getExperience());
+                upSoccerPlayer.setPosition(soccerPlayer.getPosition());
+                upSoccerPlayer.setUrlImg(soccerPlayer.getUrlImg());
+            }
+        }
     }
 }
 

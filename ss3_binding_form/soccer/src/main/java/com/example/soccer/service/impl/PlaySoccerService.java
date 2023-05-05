@@ -33,17 +33,12 @@ public class PlaySoccerService implements IPlaySoccerService {
     }
 
     @Override
-    public boolean createPlayer(SoccerPlayer player) {
-        return this.playerRepository.createPlayer(player);
+    public void create(SoccerPlayer soccerPlayer) {
+        playerRepository.create(soccerPlayer);
     }
 
     @Override
-    public boolean updatePlayer(SoccerPlayer player) {
-        SoccerPlayer player1 =this.playerRepository.findById(player.getId());
-        if (player1==null) {
-            return false;
-        } else {
-            return this.playerRepository.updatePlayer(player1);
-        }
+    public void update(SoccerPlayer soccerPlayer) {
+        playerRepository.update(soccerPlayer);
     }
 }

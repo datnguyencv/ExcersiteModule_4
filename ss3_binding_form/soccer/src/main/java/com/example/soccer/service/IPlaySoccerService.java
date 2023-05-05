@@ -11,7 +11,7 @@ public interface IPlaySoccerService {
 
     SoccerPlayer findById(Integer id);
 
-    boolean createPlayer(SoccerPlayer player);
+    void create(SoccerPlayer soccerPlayer);
 
-    boolean updatePlayer(SoccerPlayer player);
+    void update(SoccerPlayer soccerPlayer);
 }

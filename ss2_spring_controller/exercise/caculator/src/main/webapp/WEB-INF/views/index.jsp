@@ -36,7 +36,7 @@
     <button type="submit" class="btn btn-outline-primary" name="action" value="multiplication">Multiplication (*)</button>
     <button type="submit" class="btn btn-outline-primary" name="action" value="division">Division (/)</button>
     <div>
-        <h2 style="font-weight: bolder; color: red">Result ${action}: ${result}</h2>
+        <h2 style="font-weight: bolder; color: red" >Result ${action}: ${result}</h2>
     </div>
 </form>
 <!-- Optional JavaScript -->
