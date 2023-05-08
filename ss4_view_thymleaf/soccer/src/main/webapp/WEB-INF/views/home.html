@@ -37,15 +37,15 @@
             <td th:text="${play.dateOfBirth}"></td>
             <td th:text="${play.experience}"></td>
             <td th:text="${play.position}"></td>
-            <td><img alt="Error Loading.." src=" ${play.urlImg}" width="120px"></td>
+            <td><img alt="Error Loading.." th:src="${play.urlImg}" width="120px"></td>
             <td><!-- Button trigger modal -->
                 <button class="btn btn-danger btn-sm" data-target="#delete" data-toggle="modal"
-                        onclick="info('${play.id}','${play.name}')" type="button">
+                        th:onclick="info('${play.id}','${play.name}')" type="button">
                     Delete
                 </button>
             </td>
             <td><!-- Button trigger modal -->
-                <button onclick="infoDetail('${play.id}','${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')"
+                <button th:onclick="infoDetail('${play.id}','${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')"
                         type="button"
                 class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detail">
                 Details
