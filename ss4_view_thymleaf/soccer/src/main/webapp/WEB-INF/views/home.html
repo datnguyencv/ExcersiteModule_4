@@ -37,7 +37,9 @@
             <td th:text="${play.dateOfBirth}"></td>
             <td th:text="${play.experience}"></td>
             <td th:text="${play.position}"></td>
-            <td><img alt="Error Loading.." th:src="${play.urlImg}" width="120px"></td>
+            <td>
+                <img th:src="${play.urlImg}" th:alt="Error Loading.." style="width:120px;"/>
+            </td>
             <td><!-- Button trigger modal -->
                 <button class="btn btn-danger btn-sm" data-target="#delete" data-toggle="modal"
                         th:onclick="info('${play.id}','${play.name}')" type="button">
