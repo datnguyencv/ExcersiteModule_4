@@ -1,9 +1,4 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!doctype html>
-<html lang="en">
+<html xmlns:th="https://thymeleaf.org" lang="en">
 <head>
     <title>Soccer Player</title>
     <!-- Required meta tags -->
@@ -36,8 +31,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${playList}" var="play">
-            <tr>
+            <tr th:forEach items="${playList}" var="play">
                 <td>${play.code}</td>
                 <td>${play.name}</td>
                 <td>${play.dateOfBirth}</td>
@@ -45,21 +39,20 @@
                 <td>${play.position}</td>
                 <td><img src=" ${play.urlImg}" width="120px" alt="Error Loading.."></td>
                 <td><!-- Button trigger modal -->
-                    <button type="button" onclick="info(${play.id},'${play.name}')" class="btn btn-danger btn-sm"
+                    <button type="button" onclick="info('${play.id}','${play.name}')" class="btn btn-danger btn-sm"
                             data-toggle="modal" data-target="#delete">
                         Delete
                     </button>
                 </td>
                 <td><!-- Button trigger modal -->
                     <button type="button"
-                            onclick="infoDetail(${play.id},'${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')"
+                            onclick="infoDetail('${play.id}','${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')"
                         <%--                            onclick="infoDetail(${play.id},'${fn:escapeXml(play.code)}','${fn:escapeXml(play.name)}','${fn:escapeXml(play.dateOfBirth)}','${fn:escapeXml(play.experience)}','${fn:escapeXml(play.position)}','${fn:escapeXml(play.imgUrl)}')"--%>
                             class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detail">
                         Details
                     </button>
                 </td>
             </tr>
-        </c:forEach>
         </tbody>
     </table>
 </div>
