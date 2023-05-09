@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class PlaySoccerRepository implements IPlaySoccerRepository {
@@ -69,7 +70,7 @@ public class PlaySoccerRepository implements IPlaySoccerRepository {
     @Override
     public void update(SoccerPlayer soccerPlayer) {
         for (SoccerPlayer upSoccerPlayer : playList) {
-            if (upSoccerPlayer.getId() == soccerPlayer.getId()) {
+            if (Objects.equals(upSoccerPlayer.getId(), soccerPlayer.getId())) {
                 upSoccerPlayer.setCode(soccerPlayer.getCode());
                 upSoccerPlayer.setName(soccerPlayer.getName());
                 upSoccerPlayer.setDateOfBirth(soccerPlayer.getDateOfBirth());

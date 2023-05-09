@@ -15,8 +15,9 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping("")
-    public String getHomePage(Model model) {
+    public String getHomePage(@RequestParam(value = "name",defaultValue = "") String name, Model model) {
         model.addAttribute("products", productService.findAll());
+        model.addAttribute("products", productService.search(name));
         model.addAttribute("Product", new Product());
         return "/index";
     }
@@ -55,11 +56,5 @@ public class ProductController {
     public String getViewPage(@PathVariable("id") int id, Model model) {
         model.addAttribute("Product", productService.findById(id));
         return "/view";
-    }
-
-    @GetMapping("/search")
-    public String search(@RequestParam("search") String name, Model model) {
-        model.addAttribute("products", productService.search(name));
-        return "/index";
     }
 }

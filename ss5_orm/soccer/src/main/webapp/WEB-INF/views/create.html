@@ -1,6 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html xmlns:th="https://thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Create Soccer Player</title>
 </head>
@@ -13,7 +11,7 @@
     }
 </style>
 <body>
-
+<nav th:replace="layout :: navbar"></nav>
 <form th:action="/create" method="post" modelAttribute="soccerPlayer">
     <label>Code</label>
     <input name="code" type="text"/><br>
@@ -29,6 +27,7 @@
     <input name="image" type="text"/><br>
     <button type="submit">Add New</button>
 </form>
+<nav th:replace="layout :: footer"></nav>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

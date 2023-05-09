@@ -14,9 +14,11 @@ public class PlaySoccerController {
     private IPlaySoccerService playSoccerService;
 
     @GetMapping("/")
-    private String showAll(Model model) {
+    private String showAll(@RequestParam(name ="search",defaultValue = "") String name, Model model) {
         model.addAttribute("playList", this.playSoccerService.findAll());
-        model.addAttribute("msg", "Hello World");
+        model.addAttribute("playList", this.playSoccerService.findAllByName(name));
+        model.addAttribute("player", new SoccerPlayer());
+
         return "home";
     }
 
@@ -44,7 +46,7 @@ public class PlaySoccerController {
     @PostMapping("/create")
     public String createSoccerPlayer(@ModelAttribute SoccerPlayer soccerPlayer) {
         playSoccerService.create(soccerPlayer);
-        return "redirect:/soccer-player";
+        return "redirect:/";
     }
 
     @GetMapping("/update/{id}")
@@ -56,7 +58,7 @@ public class PlaySoccerController {
     @PostMapping("/update")
     public String updateSoccerPlayer(@ModelAttribute SoccerPlayer soccerPlayer) {
         playSoccerService.update(soccerPlayer);
-        return "redirect:/soccer-player";
+        return "redirect:/";
     }
     
 }

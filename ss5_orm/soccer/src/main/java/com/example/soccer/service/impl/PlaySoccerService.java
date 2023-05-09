@@ -14,8 +14,13 @@ public class PlaySoccerService implements IPlaySoccerService {
     private IPlaySoccerRepository playerRepository;
 
     @Override
+    public List<SoccerPlayer> findAllByName(String name) {
+        return playerRepository.findAllByName(name);
+    }
+
+    @Override
     public List<SoccerPlayer> findAll() {
-        return this.playerRepository.findAll();
+        return playerRepository.findAll();
     }
 
     @Override
