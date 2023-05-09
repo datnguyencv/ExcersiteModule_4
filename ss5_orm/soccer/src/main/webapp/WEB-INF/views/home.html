@@ -9,6 +9,24 @@
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <style>
+        .navbar {
+            backdrop-filter: blur(5px); /* áp dụng hiệu ứng blur */
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .nav-link {
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); /* tạo hiệu ứng gradient */
+            background-size: 200% auto;
+            color: #fff;
+            border-radius: 10px;
+            transition: .2s ease-out;
+        }
+
+        .nav-link:hover {
+            background-position: right center;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="layout :: navbar"></nav>
