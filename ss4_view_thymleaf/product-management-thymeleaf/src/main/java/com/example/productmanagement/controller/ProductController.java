@@ -15,9 +15,11 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping("")
-    public String getHomePage(Model model) {
+    public String getHomePage(@RequestParam("search") String name, Model model) {
+        model.addAttribute("products", productService.search(name));
         model.addAttribute("products", productService.findAll());
         model.addAttribute("Product", new Product());
+
         return "/index";
     }
 
@@ -38,9 +40,9 @@ public class ProductController {
     }
 
     @PostMapping("/update")
-    public String update(Model model, @ModelAttribute("Product") Product Product) {
+    public String update(Model model, @ModelAttribute("Product") Product Product, RedirectAttributes attributes) {
         productService.update(Product);
-        model.addAttribute("mess", "Update successful!");
+        attributes.addFlashAttribute("mess", "Update successful!");
         return "redirect:/product";
     }
 
@@ -55,11 +57,5 @@ public class ProductController {
     public String getViewPage(@PathVariable("id") int id, Model model) {
         model.addAttribute("Product", productService.findById(id));
         return "/view";
-    }
-
-    @GetMapping("/search")
-    public String search(@RequestParam("search") String name, Model model) {
-        model.addAttribute("products", productService.search(name));
-        return "/index";
     }
 }
