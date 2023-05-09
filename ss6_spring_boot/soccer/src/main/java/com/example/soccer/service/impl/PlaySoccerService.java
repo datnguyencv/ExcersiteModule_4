@@ -11,24 +11,35 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlaySoccerService implements IPlaySoccerService {
     @Autowired
-    private IPlaySoccerRepository repository;
+    private IPlaySoccerRepository playSoccerRepository;
+
     @Override
-    public Page<SoccerPlayer> findAll(String search, Pageable pageable) throws Exception {
-        return repository.findAllByNameContaining(search, pageable);
+    public Page<SoccerPlayer> findAllByNameAndDateOfBirth(String search, String fromDate, String toDate, Pageable pageable) {
+        return playSoccerRepository.findAllByNameContainingAndDateOfBirthBetween(search, fromDate, toDate, pageable);
     }
 
     @Override
-    public SoccerPlayer create(SoccerPlayer soccerPlayer) {
-        return repository.save(soccerPlayer);
+    public Page<SoccerPlayer> findAllByName(String search, Pageable pageable) {
+        return playSoccerRepository.findByNameContaining(search, pageable);
     }
 
     @Override
-    public SoccerPlayer update(SoccerPlayer soccerPlayer) {
-        return repository.save(soccerPlayer);
+    public void create(SoccerPlayer soccerPlayer) {
+        this.playSoccerRepository.save(soccerPlayer);
+    }
+
+    @Override
+    public void update(SoccerPlayer soccerPlayer) {
+        this.playSoccerRepository.save(soccerPlayer);
     }
 
     @Override
     public void delete(SoccerPlayer soccerPlayer) {
-        repository.delete(soccerPlayer);
+        this.playSoccerRepository.delete(soccerPlayer);
+    }
+
+    @Override
+    public SoccerPlayer findById(Integer id) {
+        return playSoccerRepository.findById(id).get();
     }
 }

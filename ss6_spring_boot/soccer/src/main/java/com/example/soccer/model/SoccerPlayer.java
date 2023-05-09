@@ -1,9 +1,6 @@
 package com.example.soccer.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class SoccerPlayer {
@@ -16,12 +13,14 @@ public class SoccerPlayer {
     private String experience;
     private String position;
     private String urlImg;
+    @ManyToOne
+    @JoinColumn(name = "team_id", nullable = false)
+    private Teams teams;
 
     public SoccerPlayer() {
     }
 
-    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, String experience,
-                        String position, String urlImg) {
+    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, String experience, String position, String urlImg, Teams teams) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -29,6 +28,15 @@ public class SoccerPlayer {
         this.experience = experience;
         this.position = position;
         this.urlImg = urlImg;
+        this.teams = teams;
+    }
+
+    public Teams getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Teams teams) {
+        this.teams = teams;
     }
 
     public String getCode() {

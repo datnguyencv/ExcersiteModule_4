@@ -5,10 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IPlaySoccerService {
-    Page<SoccerPlayer> findAll(String search, Pageable pageable) throws Exception;
-    SoccerPlayer create(SoccerPlayer soccerPlayer);
-    SoccerPlayer update(SoccerPlayer soccerPlayer);
+    Page<SoccerPlayer> findAllByNameAndDateOfBirth(String search, String fromDate, String tDate, Pageable pageable);
+    Page<SoccerPlayer> findAllByName(String search, Pageable pageable);
+    void create(SoccerPlayer soccerPlayer);
+    void update(SoccerPlayer soccerPlayer);
     void delete(SoccerPlayer soccerPlayer);
-
-
+    SoccerPlayer findById(Integer id);
 }

@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IPlaySoccerRepository extends JpaRepository<SoccerPlayer, Integer> {
-    Page<SoccerPlayer> findAllByNameContaining(String search, Pageable pageable);
+    Page<SoccerPlayer> findAllByNameContainingAndDateOfBirthBetween(String search, String fromDate, String toDate, Pageable pageable);
+
+    Page<SoccerPlayer> findByNameContaining(String search, Pageable pageable);
 }
