@@ -8,14 +8,10 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class PlaySoccerRepository implements IPlaySoccerRepository {
-    private static List<SoccerPlayer> playList = new ArrayList<>();
-
 
     @Override
     public List<SoccerPlayer> findAllByName(String name) {
@@ -46,21 +42,35 @@ public class PlaySoccerRepository implements IPlaySoccerRepository {
 
     @Override
     public boolean removePlayer(Integer id) {
-        if (playList.remove(findById(id))) {
+        SoccerPlayer soccerPlayer = findById(id);
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.remove(soccerPlayer);
+            transaction.commit();
             return true;
+        } catch (Exception e) {
+            if (transaction != null || soccerPlayer == null) {
+                assert transaction != null;
+                transaction.rollback();
+                return false;
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
-        ;
-        return false;
+        return true;
     }
 
     @Override
     public SoccerPlayer findById(Integer id) {
-        for (int i = 0; i < playList.size(); i++) {
-            if (playList.get(i).getId().equals(id)) {
-                return playList.get(i);
-            }
-        }
-        return null;
+        SoccerPlayer soccerPlayer;
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        soccerPlayer = (SoccerPlayer) session.createQuery("FROM SoccerPlayer WHERE id = :id").setParameter("id", id).getSingleResult();
+        session.close();
+        return soccerPlayer;
     }
 
 
@@ -84,7 +94,7 @@ public class PlaySoccerRepository implements IPlaySoccerRepository {
 
     @Override
     public void update(SoccerPlayer soccerPlayer) {
-        SoccerPlayer upSoccerPlayer = findById(SoccerPlayer.getId());
+        SoccerPlayer upSoccerPlayer = findById(soccerPlayer.getId());
         Session session = ConnectionUtil.sessionFactory.openSession();
         Transaction transaction = null;
         try {
