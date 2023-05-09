@@ -34,8 +34,8 @@ public class PlaySoccerService implements IPlaySoccerService {
     }
 
     @Override
-    public void delete(SoccerPlayer soccerPlayer) {
-        this.playSoccerRepository.delete(soccerPlayer);
+    public void removePlayer(SoccerPlayer soccerPlayer) {
+        playSoccerRepository.delete(soccerPlayer);
     }
 
     @Override

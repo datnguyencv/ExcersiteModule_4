@@ -9,6 +9,8 @@ public interface IPlaySoccerService {
     Page<SoccerPlayer> findAllByName(String search, Pageable pageable);
     void create(SoccerPlayer soccerPlayer);
     void update(SoccerPlayer soccerPlayer);
-    void delete(SoccerPlayer soccerPlayer);
+
+    void removePlayer(SoccerPlayer soccerPlayer);
+
     SoccerPlayer findById(Integer id);
 }
