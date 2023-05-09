@@ -226,6 +226,12 @@
                                        type="text">
                             </div>
                             <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Teams: </label>
+                                <select class="form-control" th:field="*{teams}">
+                                    <option th:each="team : ${teams}" th:text="${team.name}" th:value="${team.id}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Avata Url: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6" th:field="*{urlImg}"
                                        type="text">
@@ -256,7 +262,7 @@
         document.getElementById("nameDelete").innerText = name;
     }
 
-    function infoDetail(id, code, name, dateOfBirth, experience, position, urlImg) {
+    function infoDetail(id, code, name, dateOfBirth, experience, position, urlImg, teams) {
         // Get the modal element
         var modal = document.getElementById("detail");
 
@@ -266,6 +272,7 @@
         modal.querySelector(".modal-body #dob").textContent = dateOfBirth;
         modal.querySelector(".modal-body #exp").textContent = experience;
         modal.querySelector(".modal-body #pos").textContent = position;
+        modal.querySelector(".modal-body #pos").textContent = teams;
         modal.querySelector(".modal-body #img").src = urlImg;
     }
 </script>

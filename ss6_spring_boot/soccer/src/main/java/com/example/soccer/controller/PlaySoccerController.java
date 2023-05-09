@@ -95,6 +95,7 @@ public class PlaySoccerController {
     @GetMapping("/update/{id}")
     public String showUpdateSoccerPlayer(@PathVariable("id") int id, Model model) {
         model.addAttribute("soccerPlayer", playSoccerService.findById(id));
+        model.addAttribute("teams", teamService.findAll());
         return "/update";
     }
 
