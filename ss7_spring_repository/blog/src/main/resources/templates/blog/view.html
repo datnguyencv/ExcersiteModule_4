@@ -14,7 +14,7 @@
 <navbar th:replace="/layout :: navbar"></navbar>
 <h1>Edit Blog</h1>
 <p th:text="${mess}"></p>
-<form th:action="@{/update}" th:object="${blog}" method="post">
+<form th:action="@{/update-blog}" th:object="${blog}" method="post">
   <div class="mb-3">
     <input type="hidden" th:field="*{id}" class="form-control" id="exampleInputEmail112"
            aria-describedby="emailHelp">
@@ -30,9 +30,15 @@
            aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail2" class="form-label">Author</label>
-    <input type="text" th:field="*{category}" class="form-control" id="exampleInputEmail2"
-           aria-describedby="emailHelp">
+    <label  class="form-label">Category</label>
+    <select th:field="*{category}"  class="form-select" aria-label="Default select example" disabled>
+      <option th:each="category: ${categories}" th:text="${category.getName()}" th:value="${category.getId()}" disabled></option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail4" class="form-label">Initialization date</label>
+    <input type="text" th:field="*{localDate}" class="form-control" id="exampleInputEmail4"
+           aria-describedby="emailHelp" disabled>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail0" class="form-label">Content</label>

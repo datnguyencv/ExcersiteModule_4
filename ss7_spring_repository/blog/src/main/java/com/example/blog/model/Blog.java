@@ -7,24 +7,23 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String title;
-    private String type;
     private String content;
     private String author;
+    private String localDate;
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     public Blog() {
     }
 
-    public Integer getId() {
-        return id;
+    public String getLocalDate() {
+        return localDate;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setLocalDate(String localDate) {
+        this.localDate = localDate;
     }
 
     public Category getCategory() {
@@ -35,20 +34,20 @@ public class Blog {
         this.category = category;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getContent() {

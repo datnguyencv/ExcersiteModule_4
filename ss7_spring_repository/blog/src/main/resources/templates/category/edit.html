@@ -1,29 +1,19 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout :: head">
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <navbar th:replace="/layout :: navbar"></navbar>
-<h1>List Blog</h1>
+<h1>List blog</h1>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add new Blog
+  Add new Category
 </button>
 <p th:text="${mess}"></p>
-<table class="table table-dark table-striped" id="table">
+<table class="table table-success table-striped" id="table">
   <thead>
   <tr>
     <th>STT</th>
     <th>ID</th>
-    <th>Blog Title</th>
-    <th>Content</th>
-    <th>Author</th>
     <th>Category</th>
     <th>Edit</th>
     <th>Delete</th>
@@ -31,15 +21,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="blog, iState : ${blogList}">
+  <tr th:each="category, iState : ${categories}">
     <td th:text="${iState.count}"></td>
-    <td th:text="${blog.getId()}"></td>
-    <td th:text="${blog.getTitle()}"></td>
-    <td th:text="${blog.getContent()}"></td>
-    <td th:text="${blog.getAuthor()}"></td>
-    <td th:text="${blog.category?.name}"></td>
+    <td th:text="${category.getId()}"></td>
+    <td th:text="${category.getName()}"></td>
     <td>
-      <a th:href="@{/edit/{id}(id=${blog.getId()})}">
+      <a th:href="@{/edit-category/{id}(id=${category.getId()})}">
         <button type="submit" class="btn btn-warning">
           Edit
         </button>
@@ -47,13 +34,12 @@
     </td>
     <td>
       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-              th:attr="onclick=|info('${blog.getId()}','${blog.getTitle()}')|"
-      >
+              th:attr="onclick=|info('${category.getId()}', '${category.getName()}')|">
         Delete
       </button>
     </td>
     <td>
-      <a th:href="@{/view/{id}(id=${blog.getId()})}">
+      <a th:href="@{/view-category/{id}(id=${category.getId()})}">
         <button type="submit" class="btn btn-success">
           View
         </button>
@@ -62,41 +48,40 @@
   </tr>
   </tbody>
 </table>
+<!--phân trang-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" th:if="${categories.hasPrevious()}"
+         th:href="@{/list-category(page=${categories.number -1},nameSearch=${nameSearch})}">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" th:href="@{/list-category(page=0,nameSearch=${nameSearch})}">1</a></li>
+    <li class="page-item"><a class="page-link" th:href="@{/list-category(page=1,nameSearch=${nameSearch})}">2</a></li>
+    <li class="page-item">
+      <a class="page-link" th:if="${categories.hasNext()}"
+         th:href="@{/list-category(page=${categories.number +1},nameSearch=${nameSearch})}">Next</a>
+    </li>
+  </ul>
+</nav>
 <footer th:replace="/layout :: footer"></footer>
 <!--Modal create-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Create blog</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create category</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/create}" th:object="${blog}" method="post">
+        <form th:action="@{/create-category}" th:object="${category}" method="post">
           <div class="mb-3">
             <input type="hidden" th:field="*{id}" class="form-control" id="exampleInputEmail1"
                    aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Name blog</label>
-            <input type="text" th:field="*{title}" class="form-control" id="exampleInputEmail2"
+            <label for="exampleInputEmail1" class="form-label">Tittle</label>
+            <input type="text" th:field="*{name}" class="form-control" id="exampleInputEmail2"
                    aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Content</label>
-            <input type="text" th:field="*{content}" class="form-control" id="exampleInputEmail3"
-                   aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Author</label>
-            <input type="text" th:field="*{author}" class="form-control" id="exampleInputEmail0"
-                   aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Category</label>
-            <select class="form-control" th:field="*{category}">
-              <option th:each="catagory : ${categoryList}" th:text="${catagory.name}" th:value="${catagory.id}"></option>
-            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -109,7 +94,7 @@
 </div>
 
 <!--Modal delete-->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -117,10 +102,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/delete" method="get">
+        <form action="/delete-category" method="get">
           <input hidden type="number" id="idDelete" name="idDelete">
           <span>
-                        You want delete <span style="color: red" id="nameDelete"></span>
+                        Bạn có chắc chắn muốn xóa <span style="color: red" id="nameDelete"></span>
                     </span>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -132,11 +117,11 @@
   </div>
 </div>
 <script>
-  function info(id, name) {
+  function info(id, category) {
     document.getElementById("idDelete").value = id;
-    document.getElementById("nameDelete").innerText = name;
+    document.getElementById("nameDelete").innerText = category;
   }
-</script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

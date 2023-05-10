@@ -2,6 +2,7 @@ package com.example.blog.controller;
 
 import com.example.blog.model.Blog;
 import com.example.blog.service.IBlogService;
+import com.example.blog.service.ICatagorysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +12,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class BlogController {
     @Autowired
-    IBlogService blogService;
+    private IBlogService blogService;
+    @Autowired
+    private ICatagorysService categoryService;
 
     @GetMapping("")
     public String showBlogList(Model model){
         model.addAttribute("blogList", blogService.findAll());
+        model.addAttribute("categoryList", categoryService.findAll());
+        return "index";
+    }
+
+    @GetMapping("category")
+    public String getCatagory(Model model){
+        model.addAttribute("categoryList", categoryService.findAll() );
         return "index";
     }
 
@@ -23,18 +33,21 @@ public class BlogController {
     public String listBlog(Model model){
         model.addAttribute("blogList",blogService.findAll());
         model.addAttribute("blog",new Blog());
+        model.addAttribute("categoryList", categoryService.findAll() );
         return "/list";
     }
 
     @GetMapping("/edit/{id}")
     public String editBlog(@PathVariable("id") Integer id, Model model){
         model.addAttribute("blog", blogService.findById(id));
+        model.addAttribute("categoryList", categoryService.findAll() );
         return "/edit";
     }
 
     @GetMapping("/view/{id}")
     public String viewBlog(@PathVariable("id") Integer id, Model model){
         model.addAttribute("blog", blogService.findById(id));
+        model.addAttribute("categoryList", categoryService.findAll() );
         return "/view";
     }
 
