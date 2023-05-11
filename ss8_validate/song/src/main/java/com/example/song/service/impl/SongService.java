@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class SongService implements ISongService {
     @Autowired
-    ISongRepository songRepository;
+    private ISongRepository songRepository;
 
     @Override
     public Page<Song> findAll(Pageable pageable) {

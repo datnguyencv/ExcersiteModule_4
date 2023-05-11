@@ -20,10 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SongController {
 
     @Autowired
-    ISongService songService;
+    private ISongService songService;
 
     @GetMapping("/")
-    public String getPageHome(Model model, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+    public String getPageHome(Model model, @PageableDefault(size = 5) Pageable pageable) {
         model.addAttribute("songs", songService.findAll(pageable));
         model.addAttribute("songDto", new SongDto());
         return "/home";
@@ -32,7 +32,7 @@ public class SongController {
     @PostMapping("/create")
     private String saveSong(@Validated @ModelAttribute SongDto songDto, BindingResult bindingResult,
                             RedirectAttributes redirectAttributes, Model model,
-                            @PageableDefault(page = 0, size = 5) Pageable pageable) {
+                            @PageableDefault(size = 5) Pageable pageable) {
         new SongDto().validate(songDto, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -52,7 +52,7 @@ public class SongController {
     @PostMapping("/edit")
     private String editSong(@Validated @ModelAttribute SongDto songDto, BindingResult bindingResult,
                             RedirectAttributes redirectAttributes, Model model,
-                            @PageableDefault(page = 0, size = 5) Pageable pageable) {
+                            @PageableDefault(size = 5) Pageable pageable) {
         new SongDto().validate(songDto, bindingResult);
 
         if (bindingResult.hasErrors()) {

@@ -19,7 +19,7 @@
 <!--    Thêm mới bài hát-->
 <!--</button>-->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createModal">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
     Thêm mới bài hát
 </button>
 
@@ -44,8 +44,7 @@
         <td th:text="${song.getArtist()}"></td>
         <td th:text="${song.getGenre()}"></td>
         <td>
-            <button type="button"
-                    class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#createModal1"
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#createModal1"
                     th:attr="onclick=|editSong('${song.getId()}','${song.getName()}',
                 '${song.getArtist()}','${song.getGenre()}')|">
                 Chỉnh sửa bài hát
@@ -61,8 +60,8 @@
             <a class="page-link" th:if="${songs.hasPrevious()}"
                th:href="@{/(page=${songs.number -1})}">Trang trước</a>
         </li>
-        <span th:value="${songs.number+1}"></span>/
-        <span th:value="${songs.totalPages}"></span>
+        <span class="text" th:value="${songs.number+1}"></span>/
+        <span class="text" th:value="${songs.totalPages}"></span>
         <li class="page-item">
             <a class="page-link" th:if="${songs.hasNext()}"
                th:href="@{/(page=${songs.number +1})}">Trang sau</a>
