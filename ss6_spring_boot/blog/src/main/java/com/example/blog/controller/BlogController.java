@@ -23,12 +23,6 @@ public class BlogController {
         return "index";
     }
 
-    @GetMapping("category")
-    public String getCatagory(Model model){
-        model.addAttribute("categoryList", categoryService.findAll() );
-        return "index";
-    }
-
     @GetMapping("/list-blog")
     public String listBlog(Model model){
         model.addAttribute("blogList",blogService.findAll());

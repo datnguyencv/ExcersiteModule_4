@@ -15,10 +15,11 @@
         <select th:value="${categoryTemp}" name="idSearch" class="custom-select" id="form-cate"
                 onchange="document.getElementById('submit').submit()">
             <option selected>Select one</option>
-            <option th:value="0">Category</option>
             <option th:each="category: ${categories}" th:text="${category.getName}"
                     th:value="${category.getId()}" th:selected="${categoryTemp == category.getId()}"></option>
         </select>
+        <a class="btn btn-sm btn-black" href="/list-blog">Return back all list</a>
+
     </div>
 </form>
 <p th:text="${mess}"></p>
@@ -42,7 +43,7 @@
         <td th:text="${iState.count}"></td>
         <td th:text="${blog.getId()}"></td>
         <td th:text="${blog.getLocalDate()}"></td>
-        <td th:text="${blog.getCategory().getName()}"></td>
+        <td th:text="${blog.getCategory()?.getName()}"></td>
         <td th:text="${blog.getTitle()}"></td>
         <td th:text="${blog.getAuthor()}"></td>
         <td th:text="${blog.getContent()}"></td>

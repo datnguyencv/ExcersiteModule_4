@@ -31,9 +31,9 @@ public class BlogController {
 
     @GetMapping("/list-blog")
     String blogList(Model model,
-                    @RequestParam(required = false, defaultValue = "")
+                    @RequestParam(required = false, defaultValue = "")String nameSearch,
                     @PageableDefault(size = 5, page = 0, sort = "localDate", direction = Sort.Direction.ASC)
-                    String nameSearch, Pageable pageable) {
+                     Pageable pageable) {
         Page<Blog>  blogSet = blogService.findAll(nameSearch.trim(), pageable);
         model.addAttribute("blogSet", blogSet);
         model.addAttribute("blogNew", new Blog());
@@ -48,7 +48,7 @@ public class BlogController {
                               Integer idSearch, Pageable pageable) {
         model.addAttribute("blogSet", blogService.findCategory(idSearch, pageable));
         model.addAttribute("blogNew", new Blog());
-        model.addAttribute("categories", idSearch);
+        model.addAttribute("idSearch", idSearch);
         model.addAttribute("categories", categoryService.findALLCategory());
         return "/blog/list";
     }

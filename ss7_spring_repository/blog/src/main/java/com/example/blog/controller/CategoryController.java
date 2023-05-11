@@ -38,9 +38,9 @@ public class CategoryController {
     }
 
     @PostMapping("/update-category")
-    public String updateCategory(Model model, @ModelAttribute Category category){
+    public String updateCategory(@ModelAttribute Category category, RedirectAttributes redirectAttributes){
         categoryService.updateCategory(category);
-        model.addAttribute("mess","Update successful!");
+        redirectAttributes.addFlashAttribute("mess","Update successful!");
         return "/category/edit";
     }
 
