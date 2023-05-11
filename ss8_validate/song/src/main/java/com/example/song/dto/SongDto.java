@@ -90,9 +90,12 @@ public class SongDto implements Validator {
             errors.rejectValue("artist", "artist.char");
         }
 
+        //[\p{L}]+ : một hoặc nhiều ký tự là chữ cái hoặc ký tự tiếng Việt có dấu
+        //(,[\p{L}\p{Mn}\p{Nd}\p{Pc}]+)* : (nhiều lần) một dấu phẩy , theo sau là một
+        // hoặc nhiều ký tự là chữ cái hoặc ký tự tiếng Việt có dấu, ký tự số, ký tự đặc biệt
         if (genreDto.length() > 1000) {
             errors.rejectValue("genre", "genre.length");
-        } else if ((!Pattern.matches("^[^,\\\\W]+((,[^,\\\\W]+)*)?$", genreDto))) {
+        } else if ((!Pattern.matches("^[\\p{L}]++(,[\\p{L}]++)*$", genreDto))) {
             errors.rejectValue("genre", "genre.char");
         }
 
