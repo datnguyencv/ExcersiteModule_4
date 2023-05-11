@@ -1,6 +1,7 @@
 package com.example.soccer.dto;
 
 import com.example.soccer.model.Teams;
+import com.example.utils.annotation.YearOldValid;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -14,7 +15,7 @@ public class SoccerPlayerDTO {
     @NotBlank(message = "Enter Name please")
     @Pattern(regexp = "^(?!.*\\d)[\\p{Lu}][\\p{Ll}]*([\\s][\\p{Lu}][\\p{Ll}]*)*$|^([\\p{Lu}][\\p{Ll}]*)$", message = "Name Player need format. Ex: Nguyen Van A, Nguyễn Văn A")
     private String name;
-    @NotBlank
+    @YearOldValid
     private String dateOfBirth;
     @Min(value = 1, message = "Only positive integer greater than 0")
     @NotBlank(message = "Please enter experience. Ex: 10")
