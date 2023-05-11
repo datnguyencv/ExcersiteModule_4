@@ -13,8 +13,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private Integer age;
-
+    private String dateOfBirth;
     private String userName;
     private String email;
 
@@ -25,12 +24,12 @@ public class User {
         return id;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getUserName() {
