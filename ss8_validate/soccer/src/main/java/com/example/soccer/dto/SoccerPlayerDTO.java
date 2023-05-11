@@ -24,7 +24,7 @@ public class SoccerPlayerDTO {
     @NotBlank(message = "Please enter position")
     @Pattern(regexp ="^(Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ|Thủ môn)$", message = "Name only format. Ex:Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ or Thủ môn)")
     private String position;
-    @NotBlank
+    @NotBlank(message = "Please enter Avatar Url")
     private String urlImg;
     private Teams teams;
 

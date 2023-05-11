@@ -214,7 +214,7 @@
                                 <label class="form-label" for="exampleInputEmail1">Date of birth: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail3"
                                        th:field="*{dateOfBirth}"
-                                       type="text">
+                                       type="date">
                                 <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
 
                             </div>
