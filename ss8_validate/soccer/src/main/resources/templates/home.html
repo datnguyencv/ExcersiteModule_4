@@ -41,14 +41,14 @@
 
         <form action="/" method="get">
             <div class="d-flex" style="margin-top: 16px; margin-right: 10px">
-                <input class="form-control me-2" type="search" id="search" name="search"
-                       th:value="${name}">
-                <input class="form-control me-2" type="date" id="fromDate" name="fromDate"
-                       th:value="${fromDate}">
-                <input class="form-control me-2" type="date" id="toDate" name="toDate"
-                       th:value="${toDate}">
-                <input type="submit" class="btn btn-outline-warning"
-                       style="width: 136px" value="Finding">
+                <input class="form-control me-2" id="search" name="search" th:value="${name}"
+                       type="search">
+                <input class="form-control me-2" id="fromDate" name="fromDate" th:value="${fromDate}"
+                       type="date">
+                <input class="form-control me-2" id="toDate" name="toDate" th:value="${toDate}"
+                       type="date">
+                <input class="btn btn-outline-warning" style="width: 136px"
+                       type="submit" value="Finding">
             </div>
         </form>
 
@@ -89,7 +89,9 @@
             <td><!-- Button trigger modal -->
                 <button class="btn btn-primary btn-sm"
                         data-target="#detail"
-                        data-toggle="modal" th:attr="onclick=|infoDetail('${play.id}','${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')|" type="button">
+                        data-toggle="modal"
+                        th:attr="onclick=|infoDetail('${play.id}','${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')|"
+                        type="button">
                     Details
                 </button>
             </td>
@@ -97,8 +99,8 @@
         </tbody>
     </table>
     <div class="text-center" id="random1">
-        <a class="page-item btn btn-dark active1" th:if="${soccerPlayerPage.hasPrevious()}"
-           th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, pageSizeInput=${pageSize})}">
+        <a class="page-item btn btn-dark active1" th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, pageSizeInput=${pageSize})}"
+           th:if="${soccerPlayerPage.hasPrevious()}">
             <i class="ti-angle-left">Previous</i>
         </a>
 
@@ -109,13 +111,14 @@
            th:text="${pageNumber}">
         </a>
 
-        <a class="page-item btn btn-dark active1" th:if="${soccerPlayerPage.hasNext()}"
-           th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, pageSizeInput=${pageSize})}">
+        <a class="page-item btn btn-dark active1" th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, pageSizeInput=${pageSize})}"
+           th:if="${soccerPlayerPage.hasNext()}">
             <i class="ti-angle-right">Next</i>
         </a>
         <form class="form-inline my-2 my-lg-0 mt-auto mr-2">
             <label for="page"></label>
-            <input class="form-control mr-sm-2" type="number" id="page" name="page" placeholder="Please enter Page size">
+            <input class="form-control mr-sm-2" id="page" name="page" placeholder="Please enter Page size"
+                   type="number">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
         </form>
     </div>
@@ -196,54 +199,61 @@
                     <div class="container-fluid">
                         <div class="form-group">
                             <div class="mb-3">
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" th:field="*{id}"
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1"
+                                       th:field="*{id}"
                                        type="hidden">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Code: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail2" th:field="*{code}"
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail2"
+                                       th:field="*{code}"
                                        type="text">
-                                <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+                                <span th:errors="*{code}" th:if="${#fields.hasErrors('code')}"></span>
 
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Name: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail13" th:field="*{name}"
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail13"
+                                       th:field="*{name}"
                                        type="text">
-                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                                <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Date of birth: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail3"
                                        th:field="*{dateOfBirth}"
                                        type="date">
-                                <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+                                <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
 
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Experience: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail4" th:field="*{experience}"
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail4"
+                                       th:field="*{experience}"
                                        type="text">
-                                <span th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}"></span>
+                                <span th:errors="*{experience}" th:if="${#fields.hasErrors('experience')}"></span>
 
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Position: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail5" th:field="*{position}"
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail5"
+                                       th:field="*{position}"
                                        type="text">
-                                <span th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+                                <span th:errors="*{position}" th:if="${#fields.hasErrors('position')}"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Teams: </label>
                                 <select class="form-control" th:field="*{teams}">
-                                    <option th:each="team : ${teams}" th:text="${team.name}" th:value="${team.id}"></option>
+                                    <option th:each="team : ${teams}" th:text="${team.name}"
+                                            th:value="${team.id}"></option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Avata Url: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6" th:field="*{urlImg}"
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6"
+                                       th:field="*{urlImg}"
                                        type="text">
-                                <span th:if="${#fields.hasErrors('urlImg')}" th:errors="*{urlImg}"></span>
+                                <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
 
                             </div>
                         </div>

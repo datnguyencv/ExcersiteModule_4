@@ -4,6 +4,11 @@
 </head>
 <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+<style>
+    span{
+        color: red;
+    }
+</style>
 <body>
 <nav th:replace="layout :: navbar"></nav>
 <form action="/update" method="post" th:object="${soccerPlayer}">
@@ -17,35 +22,35 @@
                 <label class="form-label" for="exampleInputEmail1">Code: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail2" th:field="*{code}"
                        type="text">
-                <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+                <span th:errors="*{code}" th:if="${#fields.hasErrors('code')}"></span>
 
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleInputEmail1">Name: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail13" th:field="*{name}"
                        type="text">
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleInputEmail1">Date of birth: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail3"
                        th:field="*{dateOfBirth}"
                        type="date">
-                <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+                <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleInputEmail1">Experience: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail4"
                        th:field="*{experience}"
                        type="text">
-                <span th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}"></span>
+                <span th:errors="*{experience}" th:if="${#fields.hasErrors('experience')}"></span>
 
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleInputEmail1">Position: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail5" th:field="*{position}"
                        type="text">
-                <span th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+                <span th:errors="*{position}" th:if="${#fields.hasErrors('position')}"></span>
 
             </div>
             <div class="mb-3">
@@ -58,7 +63,7 @@
                 <label class="form-label" for="exampleInputEmail1">Avata Url: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6" th:field="*{urlImg}"
                        type="text">
-                <span th:if="${#fields.hasErrors('urlImg')}" th:errors="*{urlImg}"></span>
+                <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
             </div>
         </div>
     </div>
@@ -68,7 +73,9 @@
     </div>
 </form>
 <nav th:replace="layout :: footer"></nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

@@ -70,9 +70,9 @@ public class SongDto implements Validator {
     public void validate(Object target, Errors errors) {
         SongDto songDto = (SongDto) target;
 
-        String nameDto = songDto.getName();
-        String artistDto = songDto.getArtist();
-        String genreDto = songDto.getGenre();
+        String nameDto = songDto.getName().trim();
+        String artistDto = songDto.getArtist().trim();
+        String genreDto = songDto.getGenre().trim();
 
         ValidationUtils.rejectIfEmpty(errors, "name", "name.empty");
         ValidationUtils.rejectIfEmpty(errors, "artist", "artist.empty");
