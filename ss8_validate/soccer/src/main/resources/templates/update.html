@@ -17,6 +17,8 @@
                 <label class="form-label" for="exampleInputEmail1">Code: </label>
                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail2" th:field="*{code}"
                        type="text">
+                <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exampleInputEmail1">Name: </label>

@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 
 public class SoccerPlayerDTO {
     private Integer id;
+    @NotBlank
+    @Pattern(regexp = "^\\d{3}$")
     private String code;
     @Size(min = 5, max = 100, message = "Only from 5 to 100 characters")
     @NotBlank(message = "Enter Name please")
