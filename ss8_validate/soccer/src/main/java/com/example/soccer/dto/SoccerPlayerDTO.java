@@ -2,13 +2,28 @@ package com.example.soccer.dto;
 
 import com.example.soccer.model.Teams;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class SoccerPlayerDTO {
     private Integer id;
     private String code;
+    @Size(min = 5, max = 100, message = "Only from 5 to 100 characters")
+    @NotBlank(message = "Enter Name please")
+    @Pattern(regexp = "^(?!.*\\d)[\\p{Lu}][\\p{Ll}]*([\\s][\\p{Lu}][\\p{Ll}]*)*$|^([\\p{Lu}][\\p{Ll}]*)$", message = "Name Player need format. Ex: Nguyen Van A, Nguyễn Văn A")
     private String name;
+    @NotBlank
     private String dateOfBirth;
+    @Min(value = 1, message = "Only positive integer greater than 0")
+    @NotBlank(message = "Please enter experience. Ex: 10")
     private String experience;
+    @Size(max = 45)
+    @NotBlank(message = "Please enter position")
+    @Pattern(regexp ="^(Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ|Thủ môn)$", message = "Name only format. Ex:Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ or Thủ môn)")
     private String position;
+    @NotBlank
     private String urlImg;
     private Teams teams;
 

@@ -208,22 +208,28 @@
                                 <label class="form-label" for="exampleInputEmail1">Name: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail13" th:field="*{name}"
                                        type="text">
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Date of birth: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail3"
                                        th:field="*{dateOfBirth}"
                                        type="text">
+                                <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Experience: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail4" th:field="*{experience}"
                                        type="text">
+                                <span th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}"></span>
+
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Position: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail5" th:field="*{position}"
                                        type="text">
+                                <span th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="exampleInputEmail1">Teams: </label>
@@ -235,6 +241,8 @@
                                 <label class="form-label" for="exampleInputEmail1">Avata Url: </label>
                                 <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6" th:field="*{urlImg}"
                                        type="text">
+                                <span th:if="${#fields.hasErrors('urlImg')}" th:errors="*{urlImg}"></span>
+
                             </div>
                         </div>
                     </div>
