@@ -102,6 +102,7 @@ public class PlaySoccerController {
     public String createSoccerPlayer(Model model, @Validated @ModelAttribute("soccerPlayer") SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", "true");
+            model.addAttribute("soccerPlayerNew",soccerPlayer);
         } else {
             SoccerPlayer player = new SoccerPlayer();
             BeanUtils.copyProperties(soccerPlayer, player);
@@ -120,7 +121,7 @@ public class PlaySoccerController {
     @PostMapping("/update")
     public String updateSoccerPlayer(Model model, @Validated @ModelAttribute("soccerPlayer") SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/update";
+            return "update";
         } else {
             SoccerPlayer player = new SoccerPlayer();
             BeanUtils.copyProperties(soccerPlayer, player);
