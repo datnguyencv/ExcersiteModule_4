@@ -15,7 +15,7 @@ public class LoggAop {
     @Autowired
     private IPlaySoccerService soccerService;
 
-    @Pointcut("execution(* com.example.soccer.controller.PlaySoccerController.updateSoccerPlayer(..))&&args(soccerPlayer,*,*,*)")
+    @Pointcut("execution(* com.example.soccer.controller.PlaySoccerController.updateSoccerPlayer(..))&&args(soccerPlayerDTO,*,*)")
     public void getAllUpdate(SoccerPlayerDTO playerDTO){}
 
     @After(value = "getAllUpdate(playerDTO)", argNames = "playerDTO")

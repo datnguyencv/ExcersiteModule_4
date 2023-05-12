@@ -1,19 +1,18 @@
 package com.example.soccer.controller;
 
 import com.example.soccer.dto.SoccerPlayerDTO;
+import com.example.soccer.exception.ExceptionHandle;
 import com.example.soccer.model.SoccerPlayer;
 import com.example.soccer.service.IPlaySoccerService;
 import com.example.soccer.service.ITeamService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,12 +30,6 @@ public class PlaySoccerController {
     @Autowired
     private ITeamService teamService;
 
-    @InitBinder("soccerPlayer")
-    public void initBinder(WebDataBinder binder) {
-        // trim dữ liệu của tất cả các trường dữ liệu String trước khi validate
-        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    }
-
     @GetMapping("")
     public String showList(Model model,
                            @RequestParam(required = false, defaultValue = "") String search,
@@ -46,7 +39,12 @@ public class PlaySoccerController {
                                    pattern = "yyyy-MM-dd") LocalDate toDate,
                            @RequestParam(required = false) Integer pageInput,
                            Pageable pageable
-    ) {
+    ) throws ExceptionHandle {
+        List<SoccerPlayer> soccerPlayerList = playSoccerService.findAllByStatusIsTrue();
+        if (soccerPlayerList.size() > 11) {
+            throw new ExceptionHandle();
+        }
+
         int pageSize = pageable.getPageSize();
         if (pageInput != null && pageInput > 0) {
             pageSize = pageInput;
@@ -99,13 +97,13 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/create")
-    public String createSoccerPlayer(Model model, @Validated @ModelAttribute("soccerPlayer") SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
+    public String createSoccerPlayer(Model model, @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", "true");
-            model.addAttribute("soccerPlayerNew",soccerPlayer);
+            model.addAttribute("soccerPlayerNew",soccerPlayerDTO);
         } else {
             SoccerPlayer player = new SoccerPlayer();
-            BeanUtils.copyProperties(soccerPlayer, player);
+            BeanUtils.copyProperties(soccerPlayerDTO, player);
             playSoccerService.create(player);
         }
         return "redirect:/";
@@ -119,12 +117,14 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/update")
-    public String updateSoccerPlayer(Model model, @Validated @ModelAttribute("soccerPlayer") SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
+    public String updateSoccerPlayer(Model model, @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "update";
+            model.addAttribute("soccerPlayer", soccerPlayerDTO);
+            model.addAttribute("teams", teamService.findAll());
+            return "updateSoccerPlayer";
         } else {
             SoccerPlayer player = new SoccerPlayer();
-            BeanUtils.copyProperties(soccerPlayer, player);
+            BeanUtils.copyProperties(soccerPlayerDTO, player);
             playSoccerService.update(player);
         }
         return "redirect:/";

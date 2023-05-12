@@ -21,4 +21,5 @@ public interface IPlaySoccerService {
     Optional<SoccerPlayer> findById(Integer id);
 
     List<SoccerPlayer> findAll();
+    List<SoccerPlayer> findAllByStatusIsTrue();
 }

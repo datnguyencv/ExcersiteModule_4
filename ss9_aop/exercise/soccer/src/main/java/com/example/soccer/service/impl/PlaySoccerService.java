@@ -50,4 +50,9 @@ public class PlaySoccerService implements IPlaySoccerService {
     public List<SoccerPlayer> findAll() {
         return this.playSoccerRepository.findAll();
     }
+
+    @Override
+    public List<SoccerPlayer> findAllByStatusIsTrue() {
+        return this.playSoccerRepository.findAllByStatusIsTrue();
+    }
 }
