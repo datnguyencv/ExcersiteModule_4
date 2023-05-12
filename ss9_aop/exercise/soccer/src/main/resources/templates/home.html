@@ -60,6 +60,7 @@
             <th>Position</th>
             <th>Avatar</th>
             <th>Options</th>
+            <th>StatusRegister</th>
             <th></th>
             <th></th>
         </tr>
@@ -72,6 +73,7 @@
             <td th:text="${play.experience}"></td>
             <td th:text="${play.position}"></td>
             <td th:text="${play.teams?.name}"></td>
+            <td th:text="${play.isStatus()}"></td>
             <td>
                 <img th:src="${play.urlImg}" th:width="200px">
             </td>
@@ -99,7 +101,8 @@
         </tbody>
     </table>
     <div class="text-center" id="random1">
-        <a class="page-item btn btn-dark active1" th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, pageSizeInput=${pageSize})}"
+        <a class="page-item btn btn-dark active1"
+           th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, pageSizeInput=${pageSize})}"
            th:if="${soccerPlayerPage.hasPrevious()}">
             <i class="ti-angle-left">Previous</i>
         </a>
@@ -111,7 +114,8 @@
            th:text="${pageNumber}">
         </a>
 
-        <a class="page-item btn btn-dark active1" th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, pageSizeInput=${pageSize})}"
+        <a class="page-item btn btn-dark active1"
+           th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, pageSizeInput=${pageSize})}"
            th:if="${soccerPlayerPage.hasNext()}">
             <i class="ti-angle-right">Next</i>
         </a>
@@ -184,9 +188,9 @@
 </div>
 
 <!-- Modal -->
-<div th:class="${hasError == 'true' ? 'modal fade show' : 'modal fade'}"
-     aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog"
-     tabindex="-1"
+<div aria-hidden="true"
+     aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog" tabindex="-1"
+     th:class="${hasError == 'true' ? 'modal fade show' : 'modal fade'}"
      th:style="${hasError == 'true' ? 'display: block' : 'display: none'}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -256,15 +260,19 @@
                                        th:field="*{urlImg}"
                                        type="text">
                                 <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
-
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Is Status Register (default: false) </label>
+                                <select class="form-control" th:field="*{status}">
+                                    <option th:value="true" th:text="${status == true ? 'Active' : 'Inactive'}"></option>
+                                    <option th:value="false" th:text="${status == false ? 'Inactive' : 'Active'}" th:selected="${status == false}"></option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                <button class="btn btn-primary" type="submit">Save</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-primary" type="submit">Save</button>
-                    </div>
-                </div>
             </form>
         </div>
     </div>

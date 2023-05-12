@@ -65,6 +65,13 @@
                        type="text">
                 <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Is Status Register (default: false) </label>
+                <select class="form-control" th:field="*{status}">
+                    <option th:value="true" th:text="${status == true ? 'Active' : 'Inactive'}"></option>
+                    <option th:value="false" th:text="${status == false ? 'Inactive' : 'Active'}" th:selected="${status == false}"></option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="modal-footer">
