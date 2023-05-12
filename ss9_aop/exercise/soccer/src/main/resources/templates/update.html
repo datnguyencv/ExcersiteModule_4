@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="dateOfBirth">Date of birth: </label>
-                <input aria-describedby="emailHelp" class="form-control" id="dateOfBirth"
+                <input aria-describedby="emailHelp" class="form-control" th:value="*{dateOfBirth}" id="dateOfBirth"
                        th:field="*{dateOfBirth}"
                        type="date">
                 <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
