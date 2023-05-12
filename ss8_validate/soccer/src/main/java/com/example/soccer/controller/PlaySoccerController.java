@@ -120,7 +120,6 @@ public class PlaySoccerController {
     @PostMapping("/update")
     public String updateSoccerPlayer(Model model, @Validated @ModelAttribute("soccerPlayer") SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("hasErrors", "true");
             return "redirect:/update";
         } else {
             SoccerPlayer player = new SoccerPlayer();

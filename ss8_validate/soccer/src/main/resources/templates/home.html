@@ -184,8 +184,10 @@
 </div>
 
 <!-- Modal -->
-<div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog"
-     tabindex="-1">
+<div th:class="${hasError == 'true' ? 'modal fade show' : 'modal fade'}"
+     aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog"
+     tabindex="-1"
+     th:style="${hasError == 'true' ? 'display: block' : 'display: none'}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="/create" method="post" th:object="${soccerPlayerNew}">
