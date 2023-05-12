@@ -15,13 +15,13 @@ public class SoccerPlayerDTO {
     private String code;
     @Size(min = 5, max = 100, message = "Only from 5 to 100 characters")
     @NotBlank(message = "Enter Name please")
-    @Pattern(regexp = "^(?!.*\\d)[\\p{Lu}][\\p{Ll}]*([\\s][\\p{Lu}][\\p{Ll}]*)*$|^([\\p{Lu}][\\p{Ll}]*)$", message = "Name Player need format. Ex: Nguyen Van A, Nguyễn Văn A")
+    @Pattern(regexp = "^[\\p{Lu}][\\p{Ll}]*([\\s][\\p{Lu}][\\p{Ll}]*)*$", message = "Name Player need format. Ex: Nguyen Van A, Nguyễn Văn A")
     private String name;
     @YearOldValid
     private String dateOfBirth;
     @Min(value = 1, message = "Only positive integer greater than 0")
     @NotBlank(message = "Please enter experience. Ex: 10")
-    private String experience;
+    private Integer experience;
     @Size(max = 45)
     @NotBlank(message = "Please enter position")
     @Pattern(regexp ="^(Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ|Thủ môn)$", message = "Name only format. Ex:Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ or Thủ môn)")
@@ -33,7 +33,7 @@ public class SoccerPlayerDTO {
     public SoccerPlayerDTO() {
     }
 
-    public SoccerPlayerDTO(Integer id, String code, String name, String dateOfBirth, String experience, String position, String urlImg, Teams teams) {
+    public SoccerPlayerDTO(Integer id, String code, String name, String dateOfBirth, Integer experience, String position, String urlImg, Teams teams) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -76,11 +76,11 @@ public class SoccerPlayerDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(String experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 

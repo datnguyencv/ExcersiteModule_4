@@ -10,7 +10,7 @@ public class SoccerPlayer {
     private String code;
     private String name;
     private String dateOfBirth;
-    private String experience;
+    private Integer experience;
     private String position;
     private String urlImg;
     @ManyToOne
@@ -20,7 +20,7 @@ public class SoccerPlayer {
     public SoccerPlayer() {
     }
 
-    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, String experience, String position, String urlImg, Teams teams) {
+    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, Integer experience, String position, String urlImg, Teams teams) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -71,11 +71,11 @@ public class SoccerPlayer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(String experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 

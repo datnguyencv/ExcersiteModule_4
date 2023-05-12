@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PlaySoccerService implements IPlaySoccerService {
     @Autowired
@@ -34,12 +36,12 @@ public class PlaySoccerService implements IPlaySoccerService {
     }
 
     @Override
-    public void removePlayer(SoccerPlayer soccerPlayer) {
-        playSoccerRepository.delete(soccerPlayer);
+    public void removePlayer(Integer id) {
+        playSoccerRepository.deleteById(id);
     }
 
     @Override
-    public SoccerPlayer findById(Integer id) {
-        return playSoccerRepository.findById(id).get();
+    public Optional<SoccerPlayer> findById(Integer id) {
+        return playSoccerRepository.findById(id);
     }
 }

@@ -74,10 +74,11 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/delete")
-    private void delete(@RequestParam("idDelete") Integer id, RedirectAttributes redirectAttributes) {
+    private String delete(@RequestParam("idDelete") Integer id, RedirectAttributes redirectAttributes) {
         SoccerPlayer soccerPlayer = this.playSoccerService.findById(id);
         this.playSoccerService.removePlayer(soccerPlayer);
         redirectAttributes.addFlashAttribute("message", "Delete Success");
+        return "redirect:/";
     }
 
     @GetMapping("/details")

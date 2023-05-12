@@ -98,6 +98,5 @@ public class SongDto implements Validator {
         } else if ((!Pattern.matches("^[\\p{L}]++(,[\\p{L}]++)*$", genreDto))) {
             errors.rejectValue("genre", "genre.char");
         }
-
     }
 }

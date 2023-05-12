@@ -39,7 +39,6 @@ public class SongController {
             model.addAttribute("songs", songService.findAll(pageable));
             model.addAttribute("songDto", songDto);
             model.addAttribute("hasError", "true");
-            return "/home";
         }
 
         Song song = new Song();
@@ -59,7 +58,6 @@ public class SongController {
             model.addAttribute("songs", songService.findAll(pageable));
             model.addAttribute("songDto", songDto);
             model.addAttribute("hasError1", "true");
-            return "/home";
         }
 
         Song song = new Song();

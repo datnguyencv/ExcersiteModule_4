@@ -4,6 +4,7 @@ package com.example.register.dto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -16,16 +17,16 @@ public class UserDto implements Validator {
 
     private Integer id;
     @NotBlank
-    @Size(min = 5, max = 45,message = "Bạn phải nhập độ dài từ 5 đến 45 ký tự")
+    @Size(min = 5, max = 45, message = "Bạn phải nhập độ dài từ 5 đến 45 ký tự")
     private String firstName;
     @NotBlank
-    @Size(min = 5, max = 45,message = "Bạn phải nhập độ dài từ 5 đến 45 ký tự")
+    @Size(min = 5, max = 45, message = "Bạn phải nhập độ dài từ 5 đến 45 ký tự")
     private String lastName;
     @NotBlank
-    @Pattern(regexp ="^(098|097|093|091|094)\\d{7}$", message="Số điện thoại phải bắt đầu 098|097|093|091|094 và tổng 10 số")
+    @Pattern(regexp = "^(098|097|093|091|094)\\d{7}$", message = "Số điện thoại phải bắt đầu 098|097|093|091|094 và tổng 10 số")
     private String phoneNumber;
     @NotBlank
-    @Pattern(regexp ="^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6})*$", message="email chưa đúng định dạng. VD: abc@email.com")
+    @Email(message = "email chưa đúng định dạng. VD: abc@email.com")
     private String email;
     @NotBlank
     private String dateOfBirth;
@@ -90,6 +91,7 @@ public class UserDto implements Validator {
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;

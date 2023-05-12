@@ -78,10 +78,10 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/delete")
-    private void delete(@RequestParam("idDelete") Integer id, RedirectAttributes redirectAttributes) {
-        SoccerPlayer soccerPlayer = this.playSoccerService.findById(id);
-        this.playSoccerService.removePlayer(soccerPlayer);
+    private String delete(@RequestParam("idDelete") Integer id, RedirectAttributes redirectAttributes) {
+        this.playSoccerService.removePlayer(id);
         redirectAttributes.addFlashAttribute("message", "Delete Success");
+        return "redirect:/";
     }
 
     @GetMapping("/details")
@@ -90,12 +90,16 @@ public class PlaySoccerController {
         return "home";
     }
 
-     @PostMapping("/create")
-    public String createSoccerPlayer(@Validated @ModelAttribute SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
-        SoccerPlayer player = new SoccerPlayer();
-        BeanUtils.copyProperties(soccerPlayer, player);
-        playSoccerService.create(player);
-        return "redirect:/";
+    @PostMapping("/create")
+    public String createSoccerPlayer(Model model, @Validated @ModelAttribute SoccerPlayerDTO soccerPlayer, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("hasErrors", "true");
+        } else {
+            SoccerPlayer player = new SoccerPlayer();
+            BeanUtils.copyProperties(soccerPlayer, player);
+            playSoccerService.create(player);
+
+        }return "redirect:/";
     }
 
     @GetMapping("/update/{id}")

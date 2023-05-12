@@ -4,6 +4,8 @@ import com.example.soccer.model.SoccerPlayer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface IPlaySoccerService {
     Page<SoccerPlayer> findAllByNameAndDateOfBirth(String search, String fromDate, String tDate, Pageable pageable);
 
@@ -13,7 +15,7 @@ public interface IPlaySoccerService {
 
     void update(SoccerPlayer soccerPlayer);
 
-    void removePlayer(SoccerPlayer soccerPlayer);
+    void removePlayer(Integer id);
 
-    SoccerPlayer findById(Integer id);
+    Optional<SoccerPlayer> findById(Integer id);
 }
