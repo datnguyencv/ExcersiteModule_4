@@ -13,6 +13,7 @@ public class SoccerPlayer {
     private Integer experience;
     private String position;
     private String urlImg;
+    private boolean status;
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
     private Teams teams;
@@ -20,7 +21,7 @@ public class SoccerPlayer {
     public SoccerPlayer() {
     }
 
-    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, Integer experience, String position, String urlImg, Teams teams) {
+    public SoccerPlayer(Integer id, String code, String name, String dateOfBirth, Integer experience, String position, String urlImg, boolean status, Teams teams) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -28,7 +29,16 @@ public class SoccerPlayer {
         this.experience = experience;
         this.position = position;
         this.urlImg = urlImg;
+        this.status = status;
         this.teams = teams;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Teams getTeams() {
@@ -43,16 +53,16 @@ public class SoccerPlayer {
         return code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {

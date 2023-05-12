@@ -4,6 +4,7 @@ import com.example.soccer.model.SoccerPlayer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IPlaySoccerService {
@@ -18,4 +19,6 @@ public interface IPlaySoccerService {
     void removePlayer(Integer id);
 
     Optional<SoccerPlayer> findById(Integer id);
+
+    List<SoccerPlayer> findAll();
 }

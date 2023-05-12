@@ -26,11 +26,12 @@ public class SoccerPlayerDTO {
     @NotBlank(message = "Please enter Avatar Url")
     private String urlImg;
     private Teams teams;
+    private boolean status;
 
     public SoccerPlayerDTO() {
     }
 
-    public SoccerPlayerDTO(Integer id, String code, String name, String dateOfBirth, Integer experience, String position, String urlImg, Teams teams) {
+    public SoccerPlayerDTO(Integer id, String code, String name, String dateOfBirth, Integer experience, String position, String urlImg, Teams teams, boolean status) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -39,6 +40,15 @@ public class SoccerPlayerDTO {
         this.position = position;
         this.urlImg = urlImg;
         this.teams = teams;
+        this.status = status;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Integer getId() {

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +44,10 @@ public class PlaySoccerService implements IPlaySoccerService {
     @Override
     public Optional<SoccerPlayer> findById(Integer id) {
         return playSoccerRepository.findById(id);
+    }
+
+    @Override
+    public List<SoccerPlayer> findAll() {
+        return this.playSoccerRepository.findAll();
     }
 }
