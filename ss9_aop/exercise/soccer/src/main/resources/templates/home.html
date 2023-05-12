@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Soccer Player</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <style>
+        .navbar {
+            backdrop-filter: blur(5px); /* áp dụng hiệu ứng blur */
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .nav-link {
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); /* tạo hiệu ứng gradient */
+            background-size: 200% auto;
+            color: #fff;
+            border-radius: 10px;
+            transition: .2s ease-out;
+        }
+
+        .nav-link:hover {
+            background-position: right center;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="layout :: navbar"></nav>
+<div class="container-fluid">
+    <h3 class="text-center text-danger">PlaySoccer Management</h3>
+    <table class="table table-striped able-bordered table-hover align-content-center">
+        <thead>
+        <!-- Button Creater modal -->
+        <button class="btn btn-primary btn-lg" data-target="#modelId" data-toggle="modal" type="button">
+            Create New Player
+        </button>
+
+        <form action="/" method="get">
+            <div class="d-flex" style="margin-top: 16px; margin-right: 10px">
+                <input class="form-control me-2" id="search" name="search" th:value="${name}"
+                       type="search">
+                <input class="form-control me-2" id="fromDate" name="fromDate" th:value="${fromDate}"
+                       type="date">
+                <input class="form-control me-2" id="toDate" name="toDate" th:value="${toDate}"
+                       type="date">
+                <input class="btn btn-outline-warning" style="width: 136px"
+                       type="submit" value="Finding">
+            </div>
+        </form>
+
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Experience</th>
+            <th>Position</th>
+            <th>Avatar</th>
+            <th>Options</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="play, iState : ${soccerPlayerPage}">
+            <td th:text="${play.code}"></td>
+            <td th:text="${play.name}"></td>
+            <td th:text="${play.dateOfBirth}"></td>
+            <td th:text="${play.experience}"></td>
+            <td th:text="${play.position}"></td>
+            <td th:text="${play.teams?.name}"></td>
+            <td>
+                <img th:src="${play.urlImg}" th:width="200px">
+            </td>
+            <td><a th:href="@{/update/{id}(id=${play.getId()})}">
+                <button class="btn btn-primary btn-sm">
+                    Update
+                </button>
+            </a></td>
+            <td><!-- Button trigger modal -->
+                <button class="btn btn-danger btn-sm" data-target="#delete" data-toggle="modal"
+                        th:attr="onclick=|info('${play.id}','${play.name}')|" type="button">
+                    Delete
+                </button>
+            </td>
+            <td><!-- Button trigger modal -->
+                <button class="btn btn-primary btn-sm"
+                        data-target="#detail"
+                        data-toggle="modal"
+                        th:attr="onclick=|infoDetail('${play.id}','${play.code}','${play.name}','${play.dateOfBirth}','${play.experience}','${play.position}','${play.urlImg}')|"
+                        type="button">
+                    Details
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center" id="random1">
+        <a class="page-item btn btn-dark active1" th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, pageSizeInput=${pageSize})}"
+           th:if="${soccerPlayerPage.hasPrevious()}">
+            <i class="ti-angle-left">Previous</i>
+        </a>
+
+        <a class="page-item number btn btn-dark active1"
+           th:classappto="${pageNumber == soccerPlayerPage.number + 1} ? 'active' : ''"
+           th:each="pageNumber : ${pageNumberList}"
+           th:href="@{/(page = ${pageNumber - 1},name = ${search}, pageInput=${pageSize})}"
+           th:text="${pageNumber}">
+        </a>
+
+        <a class="page-item btn btn-dark active1" th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, pageSizeInput=${pageSize})}"
+           th:if="${soccerPlayerPage.hasNext()}">
+            <i class="ti-angle-right">Next</i>
+        </a>
+        <form class="form-inline my-2 my-lg-0 mt-auto mr-2">
+            <label for="page"></label>
+            <input class="form-control mr-sm-2" id="page" name="page" placeholder="Please enter Page size"
+                   type="number">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+        </form>
+    </div>
+
+</div>
+<nav th:replace="layout :: footer"></nav>
+<!-- Modal - Delete-->
+<div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="delete" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="/delete" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Action Delete Box</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input hidden id="idDelete" name="idDelete" type="number">
+                    Do you want to delete this <span class="text-danger" id="nameDelete"></span> ?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal - Detail -->
+<div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="detail" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail more box</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card" style="background-color:cadetblue; border-color:darkblue;">
+                    <img alt="" class="card-img-top" id="img">
+                    <div class="card-body">
+                        <h4 class="card-title align-content-center font-weight-bold"><span id="name"></span></h4>
+                        <p class="card-text align-content-center font-weight-bold"> Code: <span id="code"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Date Of Birth:<span id="dob"></span>
+                        </p>
+                        <p class="card-text align-content-center font-weight-bold"> Experience:<span id="exp"></span>
+                        </p>
+                        <p class="card-text align-content-center font-weight-bold"> Position: <span id="pos"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div th:class="${hasError == 'true' ? 'modal fade show' : 'modal fade'}"
+     aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="modelId" role="dialog"
+     tabindex="-1"
+     th:style="${hasError == 'true' ? 'display: block' : 'display: none'}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="/create" method="post" th:object="${soccerPlayerNew}">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Box</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1"
+                                       th:field="*{id}"
+                                       type="hidden">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Code: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail2"
+                                       th:field="*{code}"
+                                       type="text">
+                                <span th:errors="*{code}" th:if="${#fields.hasErrors('code')}"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Name: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail13"
+                                       th:field="*{name}"
+                                       type="text">
+                                <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Date of birth: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail3"
+                                       th:field="*{dateOfBirth}"
+                                       type="date">
+                                <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Experience: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail4"
+                                       th:field="*{experience}"
+                                       type="number">
+                                <span th:errors="*{experience}" th:if="${#fields.hasErrors('experience')}"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Position: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail5"
+                                       th:field="*{position}"
+                                       type="text">
+                                <span th:errors="*{position}" th:if="${#fields.hasErrors('position')}"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Teams: </label>
+                                <select class="form-control" th:field="*{teams}">
+                                    <option th:each="team : ${teams}" th:text="${team.name}"
+                                            th:value="${team.id}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">Avata Url: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6"
+                                       th:field="*{urlImg}"
+                                       type="text">
+                                <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+        // Use above variables to manipulate the DOM
+
+    });
+</script>
+<script>
+    function info(id, name) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerText = name;
+    }
+
+    function infoDetail(id, code, name, dateOfBirth, experience, position, urlImg, teams) {
+        // Get the modal element
+        var modal = document.getElementById("detail");
+
+        // Set the modal content with the passed details
+        modal.querySelector(".modal-body #code").textContent = code;
+        modal.querySelector(".modal-body #name").textContent = name;
+        modal.querySelector(".modal-body #dob").textContent = dateOfBirth;
+        modal.querySelector(".modal-body #exp").textContent = experience;
+        modal.querySelector(".modal-body #pos").textContent = position;
+        modal.querySelector(".modal-body #pos").textContent = teams;
+        modal.querySelector(".modal-body #img").src = urlImg;
+    }
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
