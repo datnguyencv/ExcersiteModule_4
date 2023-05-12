@@ -11,8 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 </head>
 <body>
 <!-- Button trigger modal -->
@@ -41,7 +41,7 @@
         <td th:text="${song.getArtist()}"></td>
         <td th:text="${song.getGenre()}"></td>
         <td>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#createModal1"
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#editModal1"
                     th:attr="onclick=|editSong('${song.getId()}','${song.getName()}',
                 '${song.getArtist()}','${song.getGenre()}')|">
                 Chỉnh sửa bài hát
@@ -107,7 +107,7 @@
 
 <!--modal edit-->
 <div th:class="${hasError1 == 'true' ? 'modal fade show' : 'modal fade'}"
-     id="createModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true"
+     id="editModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true"
      th:style="${hasError1 == 'true' ? 'display: block' : 'display: none'}">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -180,7 +180,7 @@
     }
 
     function onCloseModal1() {
-        document.getElementById('createModal1').style.display = 'none';
+        document.getElementById('editModal1').style.display = 'none';
         window.location.href = "/";
     }
 

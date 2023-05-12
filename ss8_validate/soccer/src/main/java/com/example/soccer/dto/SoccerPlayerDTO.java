@@ -3,10 +3,7 @@ package com.example.soccer.dto;
 import com.example.soccer.model.Teams;
 import com.example.utils.annotation.YearOldValid;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class SoccerPlayerDTO {
     private Integer id;
@@ -20,7 +17,7 @@ public class SoccerPlayerDTO {
     @YearOldValid
     private String dateOfBirth;
     @Min(value = 1, message = "Only positive integer greater than 0")
-    @NotBlank(message = "Please enter experience. Ex: 10")
+    @NotNull(message = "Please enter experience. Ex: 10")
     private Integer experience;
     @Size(max = 45)
     @NotBlank(message = "Please enter position")

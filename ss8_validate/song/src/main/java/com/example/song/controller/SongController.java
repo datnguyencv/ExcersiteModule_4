@@ -22,6 +22,12 @@ public class SongController {
     @Autowired
     private ISongService songService;
 
+//    @InitBinder("songDto")
+//    public void initBinder(WebDataBinder binder) {
+//        // trim dữ liệu của tất cả các trường dữ liệu String trước khi validate
+//        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+//    }
+
     @GetMapping("/")
     public String getPageHome(Model model, @PageableDefault(size = 5) Pageable pageable) {
         model.addAttribute("songs", songService.findAll(pageable));
