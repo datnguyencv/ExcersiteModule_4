@@ -201,58 +201,58 @@
                     <div class="container-fluid">
                         <div class="form-group">
                             <div class="mb-3">
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1"
+                                <input aria-describedby="emailHelp" class="form-control"
                                        th:field="*{id}"
                                        type="hidden">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Code: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail2"
+                                <label class="form-label" for="code">Code: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="code"
                                        th:field="*{code}"
                                        type="text">
                                 <span th:errors="*{code}" th:if="${#fields.hasErrors('code')}"></span>
 
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Name: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail13"
+                                <label class="form-label" for="nameInput">Name: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="nameInput"
                                        th:field="*{name}"
                                        type="text">
                                 <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Date of birth: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail3"
+                                <label class="form-label" for="dateOfBirth">Date of birth: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="dateOfBirth"
                                        th:field="*{dateOfBirth}"
                                        type="date">
                                 <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
 
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Experience: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail4"
+                                <label class="form-label" for="experience">Experience: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="experience"
                                        th:field="*{experience}"
                                        type="number">
                                 <span th:errors="*{experience}" th:if="${#fields.hasErrors('experience')}"></span>
 
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Position: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail5"
+                                <label class="form-label" for="position">Position: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="position"
                                        th:field="*{position}"
                                        type="text">
                                 <span th:errors="*{position}" th:if="${#fields.hasErrors('position')}"></span>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Teams: </label>
+                                <label class="form-label">Teams: </label>
                                 <select class="form-control" th:field="*{teams}">
                                     <option th:each="team : ${teams}" th:text="${team.name}"
                                             th:value="${team.id}"></option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="exampleInputEmail1">Avata Url: </label>
-                                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail6"
+                                <label class="form-label" for="urlImg">Avata Url: </label>
+                                <input aria-describedby="emailHelp" class="form-control" id="urlImg"
                                        th:field="*{urlImg}"
                                        type="text">
                                 <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
