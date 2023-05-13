@@ -117,16 +117,24 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/update")
-    public String updateSoccerPlayer(Model model, @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO, BindingResult bindingResult) {
+    public String updateSoccerPlayer(Model model,
+                                     @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO,
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("soccerPlayer", soccerPlayerDTO);
             model.addAttribute("teams", teamService.findAll());
-            return "updateSoccerPlayer";
+
         } else {
             SoccerPlayer player = new SoccerPlayer();
             BeanUtils.copyProperties(soccerPlayerDTO, player);
             playSoccerService.update(player);
+            redirectAttributes.addFlashAttribute("message","Update Success");
         }
         return "redirect:/";
+    }
+
+    @ExceptionHandler(ExceptionHandle.class)
+    public String showException() {
+        return "errorPage";
     }
 }
