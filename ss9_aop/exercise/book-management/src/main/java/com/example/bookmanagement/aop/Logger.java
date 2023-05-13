@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Component
 @Aspect
 public class Logger {
+    private int methodAccessCount = 0;
+
     @Pointcut("execution(* com.example.bookmanagement.controller" +
             ".BookController.borrowBook(..))||execution(* com.example" +
             ".bookmanagement.controller.BookController.returnBook(..))")
@@ -29,9 +31,10 @@ public class Logger {
             ".bookmanagement.controller.BorrowerController.*(..))")
     public void getAllMethod() {
     }
-
     @Before(value = "getAllMethod()")
     public void printConsoleLibrary() {
         System.out.println("Bạn đã vào thư viện vào lúc : " + LocalDateTime.now());
+        methodAccessCount++;
+        System.out.println("Số lượt người đùng truy cập : " + methodAccessCount);
     }
 }

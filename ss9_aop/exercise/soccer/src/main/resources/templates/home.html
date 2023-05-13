@@ -38,7 +38,9 @@
         <button class="btn btn-primary btn-lg" data-target="#modelId" data-toggle="modal" type="button">
             Create New Player
         </button>
+        <h3 class="text-center p-2 text-primary">Number of players registered to play football : <span th:text="${numberRegistered}"></span></h3>
 
+        <h3 class="text-center p-2 text-dark" th:text="${#messages}"></h3>
         <form action="/" method="get">
             <div class="d-flex" style="margin-top: 16px; margin-right: 10px">
                 <input class="form-control me-2" id="search" name="search" th:value="${name}"

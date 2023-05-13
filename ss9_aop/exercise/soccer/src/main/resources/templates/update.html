@@ -5,13 +5,13 @@
 <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
 <style>
-    span{
+    span {
         color: red;
     }
 </style>
 <body>
 <nav th:replace="layout :: navbar"></nav>
-<form action="/update" method="post" th:object="${soccerPlayer}">
+<form action="/update" method="post" th:object="${soccerPlayerDTO}">
     <div class="container-fluid">
         <div class="form-group">
             <div class="mb-3">
@@ -33,9 +33,8 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="dateOfBirth">Date of birth: </label>
-                <input aria-describedby="emailHelp" class="form-control" th:value="*{dateOfBirth}" id="dateOfBirth"
-                       th:field="*{dateOfBirth}"
-                       type="date">
+                <input aria-describedby="emailHelp" class="form-control"
+                       id="dateOfBirth" th:field="*{dateOfBirth}" type="date">
                 <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
             </div>
             <div class="mb-3">
@@ -68,8 +67,9 @@
             <div class="mb-3">
                 <label class="form-label">Is Status Register (default: false) </label>
                 <select class="form-control" th:field="*{status}">
-                    <option th:value="true" th:text="${status == true ? 'Active' : 'Inactive'}"></option>
-                    <option th:value="false" th:text="${status == false ? 'Inactive' : 'Active'}" th:selected="${status == false}"></option>
+                    <option th:text="${status == true ? 'Active' : 'Inactive'}" th:value="true"></option>
+                    <option th:selected="${status == false}" th:text="${status == false ? 'Inactive' : 'Active'}"
+                            th:value="false"></option>
                 </select>
             </div>
         </div>

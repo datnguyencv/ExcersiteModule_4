@@ -15,18 +15,18 @@ public class LoggAop {
     @Autowired
     private IPlaySoccerService soccerService;
 
-    @Pointcut("execution(* com.example.soccer.controller.PlaySoccerController.updateSoccerPlayer(..))&&args(soccerPlayerDTO,*,*)")
-    public void getAllUpdate(SoccerPlayerDTO playerDTO){}
+    @Pointcut("execution(* com.example.soccer.controller.PlaySoccerController.updateSoccerPlayer(..))&&args(soccerPlayerDTO,*,*,*)")
+    public void getAllUpdate(SoccerPlayerDTO soccerPlayerDTO){}
 
-    @After(value = "getAllUpdate(playerDTO)", argNames = "playerDTO")
-    public void printUpdate(SoccerPlayerDTO playerDTO){
+    @After(value = "getAllUpdate(soccerPlayerDTO)", argNames = "soccerPlayerDTO")
+    public void printUpdate(SoccerPlayerDTO soccerPlayerDTO){
         int count = 0;
         for (SoccerPlayer soccerPlayer: soccerService.findAll()){
             if (soccerPlayer.isStatus()==true){
                 count++;
             }
         }
-        System.out.println("Player's Status" + playerDTO.getName() + " has been converted to " + playerDTO.isStatus());
+        System.out.println("Player's Status" + soccerPlayerDTO.getName() + " has been converted to " + soccerPlayerDTO.isStatus());
         System.out.println("The number of registered players is: " + count);
     }
 }

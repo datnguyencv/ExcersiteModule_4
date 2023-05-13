@@ -21,7 +21,7 @@ public class SoccerPlayerDTO {
     private Integer experience;
     @Size(max = 45)
     @NotBlank(message = "Please enter position")
-    @Pattern(regexp ="^(Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ|Thủ môn)$", message = "Name only format. Ex:Tiền đạo|Tiền vệ|Hậu vệ|Trung vệ or Thủ môn)")
+    @Pattern(regexp ="^(Tiền Đạo|Tiền Vệ|Hậu Vệ|Trung Vệ|Thủ Môn)$", message = "Name only format. Ex:Tiền Đạo|Tiền Vệ|Hậu Vệ|Trung Vệ or Thủ Môn)")
     private String position;
     @NotBlank(message = "Please enter Avatar Url")
     private String urlImg;

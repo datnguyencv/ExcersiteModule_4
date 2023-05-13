@@ -74,6 +74,7 @@ public class PlaySoccerController {
         model.addAttribute("pageNumberList", pageNumberList);
         model.addAttribute("teams", teamService.findAll());
         model.addAttribute("soccerPlayerNew", new SoccerPlayerDTO());
+        model.addAttribute("numberRegistered", soccerPlayerList.size());
         return "home";
     }
 
@@ -97,38 +98,44 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/create")
-    public String createSoccerPlayer(Model model, @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO, BindingResult bindingResult) {
+    public String createSoccerPlayer(Model model,
+                                     @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO,
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", "true");
-            model.addAttribute("soccerPlayerNew",soccerPlayerDTO);
+            model.addAttribute("soccerPlayerNew", soccerPlayerDTO);
         } else {
             SoccerPlayer player = new SoccerPlayer();
             BeanUtils.copyProperties(soccerPlayerDTO, player);
             playSoccerService.create(player);
+            redirectAttributes.addFlashAttribute("message", "Create success");
         }
         return "redirect:/";
     }
 
-    @GetMapping("/update/{id}")
+    @GetMapping("/edit/{id}")
     public String showUpdateSoccerPlayer(@PathVariable("id") int id, Model model) {
-        model.addAttribute("soccerPlayer", playSoccerService.findById(id));
+        SoccerPlayer player = this.playSoccerService.findById(id).orElse(null);
+        SoccerPlayerDTO soccerPlayerDTO = new SoccerPlayerDTO();
+        assert player != null;
+        BeanUtils.copyProperties(player, soccerPlayerDTO);
+        model.addAttribute("soccerPlayerDTO", soccerPlayerDTO);
         model.addAttribute("teams", teamService.findAll());
         return "/update";
     }
 
     @PostMapping("/update")
-    public String updateSoccerPlayer(Model model,
-                                     @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO,
-                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String updateSoccerPlayer(@ModelAttribute @Validated SoccerPlayerDTO soccerPlayerDTO,
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("soccerPlayer", soccerPlayerDTO);
+            model.addAttribute("soccerPlayerDTO", soccerPlayerDTO);
             model.addAttribute("teams", teamService.findAll());
-
+            return "update";
         } else {
             SoccerPlayer player = new SoccerPlayer();
             BeanUtils.copyProperties(soccerPlayerDTO, player);
             playSoccerService.update(player);
-            redirectAttributes.addFlashAttribute("message","Update Success");
+            redirectAttributes.addFlashAttribute("message", "Update Success");
         }
         return "redirect:/";
     }
