@@ -6,6 +6,7 @@ import com.example.bookmanagement.service.IBorrowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +20,21 @@ public class BorrowerService implements IBorrowerService {
 
     @Override
     public String setCodeBorrower() {
-        return String.format("%05d", (int) (Math.random() * 100000));
+        String codeCheck;
+        List<Borrower> borrowers = new ArrayList<>();
+        do {
+            codeCheck = String.format("%05d", (int) (Math.random() * 100000));
+            boolean isDuplicate = false;
+            for (Borrower borrower : borrowers) {
+                if (borrower.getCode().equals(codeCheck)) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                break;
+            }
+        } while (true);
+        return codeCheck;
     }
 }

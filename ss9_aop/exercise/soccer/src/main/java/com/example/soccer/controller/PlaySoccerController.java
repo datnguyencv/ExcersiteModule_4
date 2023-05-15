@@ -98,9 +98,8 @@ public class PlaySoccerController {
     }
 
     @PostMapping("/create")
-    public String createSoccerPlayer(Model model,
-                                     @Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO,
-                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String createSoccerPlayer(@Validated @ModelAttribute SoccerPlayerDTO soccerPlayerDTO,
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", "true");
             model.addAttribute("soccerPlayerNew", soccerPlayerDTO);

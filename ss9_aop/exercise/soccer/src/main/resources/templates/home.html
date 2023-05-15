@@ -31,16 +31,17 @@
 <body>
 <nav th:replace="layout :: navbar"></nav>
 <div class="container-fluid">
-    <h3 class="text-center text-danger">PlaySoccer Management</h3>
+    <h3 class="text-center text-danger m-2">PlaySoccer Management</h3>
     <table class="table table-striped able-bordered table-hover align-content-center">
         <thead>
         <!-- Button Creater modal -->
         <button class="btn btn-primary btn-lg" data-target="#modelId" data-toggle="modal" type="button">
             Create New Player
         </button>
-        <h3 class="text-center p-2 text-primary">Number of players registered to play football : <span th:text="${numberRegistered}"></span></h3>
+        <h3 class="text-center p-2 text-primary">Number of players registered to play football : <span
+                th:text="${numberRegistered}"></span></h3>
 
-        <h3 class="text-center p-2 text-dark" th:text="${#messages}"></h3>
+        <h3 class="text-center p-2 text-dark" th:text="${messages}"></h3>
         <form action="/" method="get">
             <div class="d-flex" style="margin-top: 16px; margin-right: 10px">
                 <input class="form-control me-2" id="search" name="search" th:value="${name}"
@@ -79,13 +80,13 @@
             <td>
                 <img th:src="${play.urlImg}" th:width="200px">
             </td>
-            <td><a th:href="@{/update/{id}(id=${play.getId()})}">
+            <td><a th:href="@{/edit/{id}(id=${play.getId()})}">
                 <button class="btn btn-primary btn-sm">
                     Update
                 </button>
             </a></td>
             <td><!-- Button trigger modal -->
-                <button class="btn btn-danger btn-sm" data-target="#delete" data-toggle="modal"
+                <button class="btn btn-danger btn-sm" data-target="#deleteModal" data-toggle="modal"
                         th:attr="onclick=|info('${play.id}','${play.name}')|" type="button">
                     Delete
                 </button>
@@ -132,7 +133,7 @@
 </div>
 <nav th:replace="layout :: footer"></nav>
 <!-- Modal - Delete-->
-<div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="delete" role="dialog"
+<div aria-hidden="true" aria-labelledby="modelTitleId" class="modal fade" id="deleteModal" role="dialog"
      tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -173,12 +174,13 @@
                     <img alt="" class="card-img-top" id="img">
                     <div class="card-body">
                         <h4 class="card-title align-content-center font-weight-bold"><span id="name"></span></h4>
-                        <p class="card-text align-content-center font-weight-bold"> Code: <span id="code"></span></p>
-                        <p class="card-text align-content-center font-weight-bold"> Date Of Birth:<span id="dob"></span>
+                        <p class="card-text align-content-center font-weight-bold"> Code : <span id="code"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Date Of Birth :<span id="dob"></span>
                         </p>
-                        <p class="card-text align-content-center font-weight-bold"> Experience:<span id="exp"></span>
+                        <p class="card-text align-content-center font-weight-bold"> Experience :<span id="exp"></span>
                         </p>
-                        <p class="card-text align-content-center font-weight-bold"> Position: <span id="pos"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Position : <span id="pos"></span></p>
+                        <p class="card-text align-content-center font-weight-bold"> Team : <span id="team"></span></p>
                     </div>
                 </div>
             </div>
@@ -266,8 +268,11 @@
                             <div class="mb-3">
                                 <label class="form-label">Is Status Register (default: false) </label>
                                 <select class="form-control" th:field="*{status}">
-                                    <option th:value="true" th:text="${status == true ? 'Active' : 'Inactive'}"></option>
-                                    <option th:value="false" th:text="${status == false ? 'Inactive' : 'Active'}" th:selected="${status == false}"></option>
+                                    <option th:text="${status == true ? 'Active' : 'Inactive'}"
+                                            th:value="true"></option>
+                                    <option th:selected="${status == false}"
+                                            th:text="${status == false ? 'Inactive' : 'Active'}"
+                                            th:value="false"></option>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -275,19 +280,21 @@
                                 <button class="btn btn-primary" type="submit">Save</button>
                             </div>
                         </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
-<script>
-    $('#exampleModal').on('show.bs.modal', event => {
-        var button = $(event.relatedTarget);
-        var modal = $(this);
-        // Use above variables to manipulate the DOM
+<!--<script>-->
+<!--    $('#exampleModal').on('show.bs.modal', event => {-->
+<!--        var button = $(event.relatedTarget);-->
+<!--        var modal = $(this);-->
+<!--        // Use above variables to manipulate the DOM-->
 
-    });
-</script>
+<!--    });-->
+<!--</script>-->
 <script>
     function info(id, name) {
         document.getElementById("idDelete").value = id;
@@ -304,7 +311,7 @@
         modal.querySelector(".modal-body #dob").textContent = dateOfBirth;
         modal.querySelector(".modal-body #exp").textContent = experience;
         modal.querySelector(".modal-body #pos").textContent = position;
-        modal.querySelector(".modal-body #pos").textContent = teams;
+        modal.querySelector(".modal-body #team").textContent = teams;
         modal.querySelector(".modal-body #img").src = urlImg;
     }
 </script>

@@ -38,7 +38,9 @@ public class PlaySoccerService implements IPlaySoccerService {
 
     @Override
     public void removePlayer(Integer id) {
-        playSoccerRepository.deleteById(id);
+        SoccerPlayer soccerPlayer= playSoccerRepository.findById(id).orElse(null);
+        assert soccerPlayer != null;
+        playSoccerRepository.delete(soccerPlayer);
     }
 
     @Override
