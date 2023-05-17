@@ -67,8 +67,8 @@
             <div class="mb-3">
                 <label class="form-label">Is Status Register (default: false) </label>
                 <select class="form-control" th:field="*{status}">
-                    <option th:text="${status == true ? 'Active register Play' : 'Inactive register Play'}" th:value="true"></option>
-                    <option th:selected="${status == false}" th:text="${status == false ? 'Inactive register Play' : 'Active register Play'}"
+                    <option th:text="${status == true ? 'Active' : 'Inactive'}" th:value="true"></option>
+                    <option th:selected="${status == false}" th:text="${status == false ? 'Inactive' : 'Active'}"
                             th:value="false"></option>
                 </select>
             </div>
