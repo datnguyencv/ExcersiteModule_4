@@ -13,8 +13,25 @@ public class Product {
     private String name;
     private Double price;
     private String description;
+    private String url;
 
     public Product() {
+    }
+
+    public Product(Integer id, String name, Double price, String description, String url) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Integer getId() {

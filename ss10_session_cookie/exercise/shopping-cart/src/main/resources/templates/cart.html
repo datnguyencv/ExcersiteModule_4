@@ -24,24 +24,28 @@
         <tr>
             <th>Sản phẩm</th>
             <th>Số lượng</th>
+            <th>Ảnh</th>
             <th>Giá sản phẩm</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product: ${cart.getProducts()}">
+        <tr th:each="product: ${cart.products}">
             <td scope="row">
-                <a class="btn btn-info btn-sm" th:href="@{/view/{id}(id=${product.getKey().getId()})}"
-                                th:text="${product.getKey().getName()}"></a>
+                <a class="btn btn-info btn-sm" th:href="@{/view/{id}(id=${product.key.id})}"
+                                th:text="${product.key.getName()}"></a>
             </td>
             <td>
-                <a th:href="@{/re   move/{id}(id=${product.getKey().getId()})}" th:text="${'-'}"></a>
-                <span th:text="${product.getValue()}"></span>
-                <a th:href="@{/add/{id}(id=${product.getKey().getId()})}" th:text="${'+'}"></a>
+                <a th:href="@{/re   move/{id}(id=${product.key.id})}" th:text="${'-'}"></a>
+                <span th:text="${product.value}"></span>
+                <a th:href="@{/add/{id}(id=${product.key.id})}" th:text="${'+'}"></a>
             </td>
-            <td th:text="${product.getKey().getPrice()}"></td>
             <td>
-                <a class="btn btn-danger btn-sm" th:href="@{/remove/{id}(id=${product.getKey().getId()},action='delete')}"
+                <img th:src="${product.key.url}" th:width="150" >
+            </td>
+            <td th:text="${product.key.price}"></td>
+            <td>
+                <a class="btn btn-danger btn-sm" th:href="@{/remove/{id}(id=${product.key.id},action='delete')}"
                    th:text="${'Xóa sản phẩm'}"></a>
             </td>
         </tr>

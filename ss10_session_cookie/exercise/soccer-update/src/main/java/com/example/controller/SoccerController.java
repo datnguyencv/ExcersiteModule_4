@@ -32,7 +32,7 @@ public class SoccerController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable int id, Model model) {
-        model.addAttribute("soccer", soccerService.findById(id));
+        model.addAttribute("soccer", soccerService.findById(id).get());
         return "soccer/detail";
     }
 

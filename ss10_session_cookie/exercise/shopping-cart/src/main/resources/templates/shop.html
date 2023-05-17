@@ -18,16 +18,20 @@
         <th>Tên sản phẩm</th>
         <th>Giá sản phẩm</th>
         <th>Mô tả chi tiết</th>
+        <th>Ảnh</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="product: ${products}">
-        <td scope="row"><a th:href="@{/view/{id}(id=${product.getId()})}" th:text="${product.getName()}"></a></td>
-        <td th:text="${product.getPrice()}"></td>
-        <td th:text="${product.getDescription()}"></td>
+        <td scope="row"><a th:href="@{/view/{id}(id=${product.id})}" th:text="${product.name}"></a></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
         <td>
-            <a class="btn btn-dark btn-sm" th:href="@{/add/{id}(id=${product.getId()})}">
+            <img th:src="${product.url}" th:width="150">
+        </td>
+        <td>
+            <a class="btn btn-dark btn-sm" th:href="@{/add/{id}(id=${product.id})}">
                 Thêm vào giỏ hàng
             </a>
         </td>

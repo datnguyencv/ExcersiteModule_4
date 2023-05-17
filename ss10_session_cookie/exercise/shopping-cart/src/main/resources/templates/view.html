@@ -18,14 +18,18 @@
     <tr>
         <th>Tên sản phẩm</th>
         <th>Giá sản phẩm</th>
+        <th>Ảnh sản phẩm</th>
         <th>Mô tả sản phẩm</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td scope="row" th:text="${product.get().getName()}"></td>
-        <td th:text="${product.get().getPrice()}"></td>
-        <td th:text="${product.get().getDescription()}"></td>
+        <td scope="row" th:text="${product.get().name}"></td>
+        <td th:text="${product.get().price}"></td>
+        <td>
+            <img th:src="${product.get().url}" th:width="150">
+        </td>
+        <td th:text="${product.get().description}"></td>
     </tr>
     </tbody>
 </table>
