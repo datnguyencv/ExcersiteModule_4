@@ -7,7 +7,9 @@ import com.example.soccer.service.ITeamService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @RestController
@@ -35,12 +38,28 @@ public class PlaySoccerRestController {
                                              pattern = "yyyy-MM-dd") LocalDate fromDate,
                                      @RequestParam(required = false) @DateTimeFormat(
                                              pattern = "yyyy-MM-dd") LocalDate toDate,
-                                     @RequestParam(required = false) Integer pageInput,
+                                     @RequestParam(required = false) Integer size,
                                      Pageable pageable) {
 
-        Page<SoccerPlayer> players = this.playSoccerService.findAllByName(search, pageable);
+        int pageSize = pageable.getPageSize();
+        if (size != null && size > 0) {
+            pageSize = size;
+        }
+
+        Sort sort = search.isEmpty() ? Sort.by("dateOfBirth").ascending() : Sort.by("name").ascending();
+        Page<SoccerPlayer> soccerPlayerPage;
+        String fromStr = null;
+        String toStr = null;
+        if (fromDate != null && toDate != null) {
+            fromStr = fromDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            toStr = toDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            soccerPlayerPage = playSoccerService.findAllByNameAndDateOfBirth(search, fromStr, toStr, PageRequest.of(
+                    pageable.getPageNumber(), pageSize, sort));
+        } else {
+            soccerPlayerPage = playSoccerService.findAllByName(search, PageRequest.of(pageable.getPageNumber(), pageSize, sort));
+        }
         model.addAttribute("soccerPlayerDTO", new SoccerPlayerDTO());
-        return new ResponseEntity<>(players, HttpStatus.OK);
+        return new ResponseEntity<>(soccerPlayerPage, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

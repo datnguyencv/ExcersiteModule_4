@@ -105,7 +105,7 @@
     </table>
     <div class="text-center" id="random1">
         <a class="page-item btn btn-dark active1"
-           th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, pageSizeInput=${pageSize})}"
+           th:href="@{/(page = ${soccerPlayerPage.number - 1}, name = ${search}, size=${size})}"
            th:if="${soccerPlayerPage.hasPrevious()}">
             <i class="ti-angle-left">Previous</i>
         </a>
@@ -113,18 +113,18 @@
         <a class="page-item number btn btn-dark active1"
            th:classappto="${pageNumber == soccerPlayerPage.number + 1} ? 'active' : ''"
            th:each="pageNumber : ${pageNumberList}"
-           th:href="@{/(page = ${pageNumber - 1},name = ${search}, size=${pageSize})}"
+           th:href="@{/(page = ${pageNumber - 1},name = ${search}, size=${size})}"
            th:text="${pageNumber}">
         </a>
 
         <a class="page-item btn btn-dark active1"
-           th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, pageSizeInput=${pageSize})}"
+           th:href="@{/(page = ${soccerPlayerPage.number + 1}, name =${search}, size=${size})}"
            th:if="${soccerPlayerPage.hasNext()}">
             <i class="ti-angle-right">Next</i>
         </a>
         <form class="form-inline my-2 my-lg-0 mt-auto mr-2">
-            <label for="page"></label>
-            <input class="form-control mr-sm-2" id="page" name="page" placeholder="Please enter Page size"
+            <label for="size"></label>
+            <input class="form-control mr-sm-2" id="size" name="size" placeholder="Please enter Page size"
                    type="number">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
         </form>
