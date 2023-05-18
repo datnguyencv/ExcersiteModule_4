@@ -1,7 +1,9 @@
 package com.example.controller;
 
 import com.example.model.PlayerSoccer;
+import com.example.model.Team;
 import com.example.service.IFootballService;
+import com.example.service.ITeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.List;
 public class PlayerRestController {
     @Autowired
     private IFootballService playerSoccerService;
+    @Autowired
+    private ITeamService teamService;
 
     @GetMapping("")
     public ResponseEntity<List<PlayerSoccer>> getAllPlayer() {
@@ -23,6 +27,11 @@ public class PlayerRestController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(playerSoccerList, HttpStatus.OK);
+    }
+    @GetMapping("/teams")
+    public ResponseEntity<List<Team>> getAllTeams() {
+        List<Team> teamList = teamService.findAll();
+        return new ResponseEntity<>(teamList, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")

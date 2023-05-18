@@ -18,6 +18,15 @@ public class PlayerSoccer {
     public PlayerSoccer() {
     }
 
+    public PlayerSoccer(int id, String name, String birthday, int experience, String location, Team team) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.experience = experience;
+        this.location = location;
+        this.team = team;
+    }
+
     public int getId() {
         return id;
     }

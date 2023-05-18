@@ -1,6 +1,9 @@
-showList();
+$(document).ready(()=> {
+    showList();
+});
 
 function showList() {
+    listTeam();
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -8,14 +11,14 @@ function showList() {
         success: function (data) {
             console.log(data);
             let element = '';
-            for (let i = 0; i < data.content.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 element += `<tr>
                <th scope="row">${i + 1}</th>
-                <td>${data.content[i].name}</td>
-                <td>${data.content[i].birthday}</td>
-                <td>${data.content[i].location}</td>
-                <td>${data.content[i].experience}</td>
-                <td>${data.content[i].team?.name}</td>
+                <td>${data.name}</td>
+                <td>${data.birthday}</td>
+                <td>${data.location}</td>
+                <td>${data.experience}</td>
+                <td>${data.team?.name}</td>
                 </tr>`;
             }
             $('#playerList').html(element);
@@ -24,18 +27,41 @@ function showList() {
 }
 
 
+function listTeam() {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://localhost:8080/api/soccer/teams",
+        success: function (data) {
+            console.log(data);
+            showListTeams(data);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
+}
+function showListTeams(listTeams) {
+    let element = `<label class="form-label">Team</label>
+    <select class='form-control' id='teams'>`;
+    for (let team of listTeams) {
+        element += `<option value=${team.id}>${team.name}</option>`;
+    }
+    element += `</select>`;
+    $('#teamList').html(element);}
+
 function add() {
     let name = $('#name').val();
     let birthday = $('#birthday').val();
     let experience = $('#experience').val();
     let location = $('#location').val();
     let team = $('#team').val();
-    let player = {
+    let playerSoccer = {
         name: name,
         birthday: birthday,
         experience: experience,
         location: location,
-        team: team.id
+        team: {id: team}
     }
     $.ajax({
         contentType: 'application/json',

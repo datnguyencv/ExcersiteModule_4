@@ -34,12 +34,11 @@ public class Team {
         this.name = name;
     }
 
-    public List<PlayerSoccer> getFootballList() {
+    public List<PlayerSoccer> getPlayerSoccerList() {
         return playerSoccerList;
     }
 
-    public void setFootballList(List<PlayerSoccer> playerSoccerList) {
+    public void setPlayerSoccerList(List<PlayerSoccer> playerSoccerList) {
         this.playerSoccerList = playerSoccerList;
     }
-
 }
