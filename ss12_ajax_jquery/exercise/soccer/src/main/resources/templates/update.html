@@ -1,0 +1,99 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update</title>
+</head>
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+<style>
+    span {
+        color: red;
+    }
+</style>
+<body>
+<nav th:replace="layout :: navbar"></nav>
+<form action="/update" method="post" th:object="${soccerPlayerDTO}">
+    <div class="container-fluid">
+        <div class="form-group">
+            <div class="mb-3">
+                <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" th:field="*{id}"
+                       type="hidden">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="code">Code: </label>
+                <input aria-describedby="emailHelp" class="form-control" id="code" th:field="*{code}"
+                       type="text">
+                <span th:errors="*{code}" th:if="${#fields.hasErrors('code')}"></span>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="name">Name: </label>
+                <input aria-describedby="emailHelp" class="form-control" id="name" th:field="*{name}"
+                       type="text">
+                <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="dateOfBirth">Date of birth: </label>
+                <input aria-describedby="emailHelp" class="form-control"
+                       id="dateOfBirth" th:field="*{dateOfBirth}" type="date">
+                <span th:errors="*{dateOfBirth}" th:if="${#fields.hasErrors('dateOfBirth')}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="experience">Experience: </label>
+                <input aria-describedby="emailHelp" class="form-control" id="experience"
+                       th:field="*{experience}"
+                       type="number">
+                <span th:errors="*{experience}" th:if="${#fields.hasErrors('experience')}"></span>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="position">Position: </label>
+                <input aria-describedby="emailHelp" class="form-control" id="position" th:field="*{position}"
+                       type="text">
+                <span th:errors="*{position}" th:if="${#fields.hasErrors('position')}"></span>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Teams: </label>
+                <select class="form-control" th:field="*{teams}">
+                    <option th:each="team : ${teams}" th:text="${team.name}" th:value="${team.id}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="urlImg">Avata Url: </label>
+                <input aria-describedby="emailHelp" class="form-control" id="urlImg" th:field="*{urlImg}"
+                       type="text">
+                <span th:errors="*{urlImg}" th:if="${#fields.hasErrors('urlImg')}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Is Status Register (default: false) </label>
+                <select class="form-control" th:field="*{status}">
+                    <option th:text="${status == true ? 'Active' : 'Inactive'}" th:value="true"></option>
+                    <option th:selected="${status == false}" th:text="${status == false ? 'Inactive' : 'Active'}"
+                            th:value="false"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+</form>
+<nav th:replace="layout :: footer"></nav>
+<script crossorigin="anonymous"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackname.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
