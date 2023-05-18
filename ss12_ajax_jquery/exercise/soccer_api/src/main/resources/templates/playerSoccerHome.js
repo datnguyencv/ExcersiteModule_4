@@ -1,4 +1,4 @@
-$(document).ready(()=> {
+$(document).ready(() => {
     showList();
 });
 
@@ -12,14 +12,14 @@ function showList() {
             console.log(data);
             let element = '';
             for (let i = 0; i < data.length; i++) {
-                element += `<tr>`
-                element += `<th scope="row">${i + 1}</th>`
-                element += `<td>${data[i].name}</td>`
-                element += `<td>${data[i].birthday}</td>`
-                element += `<td>${data[i].location}</td>`
-                element += `<td>${data[i].experience}</td>`
-                element += `<td>${data[i].team.name}</td>`
-                element += `</tr>`;
+                element += `<tr>
+                <th scope="row">${i + 1}</th>
+                    <td>${data[i].name}</td>
+                    <td>${data[i].birthday}</td>
+                    <td>${data[i].location}</td>
+                    <td>${data[i].experience}</td>
+                    <td>${data[i].team.name}</td>
+                </tr>`;
             }
             console.log(element);
             $('#playerList').html(element);
@@ -42,6 +42,7 @@ function listTeam() {
         },
     });
 }
+
 function showListTeams(listTeams) {
     let element = `<label class="form-label">Team</label>
     <select class='form-control' id='teams'>`;
@@ -49,7 +50,8 @@ function showListTeams(listTeams) {
         element += `<option value=${team.id}>${team.name}</option>`;
     }
     element += `</select>`;
-    $('#teamList').html(element);}
+    $('#teamList').html(element);
+}
 
 function add() {
     let name = $('#name').val();
