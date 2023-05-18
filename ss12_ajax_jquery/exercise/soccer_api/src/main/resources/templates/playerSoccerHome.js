@@ -55,7 +55,8 @@ function add() {
     let birthday = $('#birthday').val();
     let experience = $('#experience').val();
     let location = $('#location').val();
-    let team = $('#team').val();
+    let team = $('#teams').val();
+    console.log(team)
     let playerSoccer = {
         name: name,
         birthday: birthday,
@@ -63,6 +64,8 @@ function add() {
         location: location,
         team: {id: team}
     }
+    console.log(playerSoccer)
+    console.log(JSON.stringify(playerSoccer));
     $.ajax({
         contentType: 'application/json',
         dataType: 'json',
