@@ -12,14 +12,14 @@ function showList() {
             console.log(data);
             let element = '';
             for (let i = 0; i < data.length; i++) {
-                element += `<tr>
-               <th scope="row">${i + 1}</th>
-                <td>${data.name}</td>
-                <td>${data.birthday}</td>
-                <td>${data.location}</td>
-                <td>${data.experience}</td>
-                <td>${data.team?.name}</td>
-                </tr>`;
+                element += `<tr>`
+                element += `<th scope="row">${i + 1}</th>`
+                element += `<td>${data[i].name}</td>`
+                element += `<td>${data[i].birthday}</td>`
+                element += `<td>${data[i].location}</td>`
+                element += `<td>${data[i].experience}</td>`
+                element += `<td>${data[i].team.name}</td>`
+                element += `</tr>`;
             }
             $('#playerList').html(element);
         }
@@ -68,7 +68,7 @@ function add() {
         dataType: 'json',
         type: 'POST',
         url: 'http://localhost:8080/api/soccer',
-        data: JSON.stringify(player),
+        data: JSON.stringify(playerSoccer),
         success: function (data) {
 
         },
