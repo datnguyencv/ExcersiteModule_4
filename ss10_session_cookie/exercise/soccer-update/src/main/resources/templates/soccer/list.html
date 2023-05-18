@@ -21,7 +21,6 @@
                     <img src="https://znews-photo.zingcdn.me/w660/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"
                          width="120"/></p>
                 <p class="card-text" th:text="${item.name}">Name</p>
-
                 <a class="stretched-link btn btn-sm btn-primary mr-2"
                    th:href="@{/detail/__${item.id}__}">Detail
                 </a>
@@ -29,7 +28,6 @@
                 <a class="stretched-link btn btn-sm btn-primary mr-2"
                    th:href="@{/add/__${item.id}__}">Favorite
                 </a>
-
             </div>
         </div>
     </tr>

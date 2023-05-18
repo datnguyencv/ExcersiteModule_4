@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Play Soccer</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Play Soccer</h1>
+<form id="searchForm">
+  <input type="text" name="search" placeholder="Search">
+  <input type="date" name="fromDate">
+  <input type="date" name="toDate">
+  <button type="submit">Search</button>
+</form>
+<div id="soccerPlayerTable"></div>
+<script>
+  $(document).ready(function() {
+    $('#searchForm').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: '/api/soccer',
+        type: 'GET',
+        data: $('#searchForm').serialize(),
+        success: function(data) {
+          var soccerPlayers = data.content;
+          var tableHtml = '<table><thead><tr><th>ID</th><th>Code</th><th>Name</th><th>Date of Birth</th><th>Experience</th><th>Position</th><th>Image</th><th>Status</th><th>Team</th></tr></thead><tbody>';
+          for (var i = 0; i < soccerPlayers.length; i++) {
+            var soccerPlayer = soccerPlayers[i];
+            tableHtml += '<tr><td>' + soccerPlayer.id + '</td><td>' + soccerPlayer.code + '</td><td>' + soccerPlayer.name + '</td><td>' + soccerPlayer.dateOfBirth + '</td><td>' + soccerPlayer.experience + '</td><td>' + soccerPlayer.position + '</td><td>' + soccerPlayer.urlImg + '</td><td>' + soccerPlayer.status + '</td><td>' + soccerPlayer.teams.name + '</td></tr>';
+          }
+          tableHtml += '</tbody></table>';
+          $('#soccerPlayerTable').html(tableHtml);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          alert('Error: ' + textStatus + ' - ' + errorThrown);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
