@@ -11,7 +11,7 @@
 <body>
 <div>
     <h3 class="text-center text-danger m-2">PlaySoccer Management</h3>
-    <table class="table table-striped able-bordered table-hover align-content-center">
+    <table id="createForm" class="table table-striped able-bordered table-hover align-content-center">
         <tr>
             <td>Name:</td>
             <td>
@@ -23,9 +23,9 @@
         <tr>
             <td>Birthday:</td>
             <td>
-                <label for="age"></label>
+                <label for="birthday"></label>
                 <input aria-describedby="helpId"
-                       class="form-control" id="age" placeholder="Input Birthday" type="date">
+                       class="form-control" id="birthday" placeholder="Input Birthday" type="date">
             </td>
         </tr>
         <tr>
@@ -55,7 +55,6 @@
                 <button class="btn btn-sm btn-success" onclick="add()" type="submit">Create Player</button>
             </td>
         </tr>
-
     </table>
     <br>
 </div>
@@ -71,7 +70,7 @@
         <th>Team</th>
     </tr>
     </thead>
-    <tbody id="playerSoccerList">
+    <tbody id="playerList">
     </tbody>
 </table>
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
@@ -88,7 +87,7 @@
                 The player has been created successfully!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">OK</button>
             </div>
         </div>
     </div>

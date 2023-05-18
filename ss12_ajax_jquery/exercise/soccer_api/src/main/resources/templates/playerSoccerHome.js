@@ -21,6 +21,7 @@ function showList() {
                 element += `<td>${data[i].team.name}</td>`
                 element += `</tr>`;
             }
+            console.log(element);
             $('#playerList').html(element);
         }
     });
@@ -73,11 +74,24 @@ function add() {
         url: 'http://localhost:8080/api/soccer',
         data: JSON.stringify(playerSoccer),
         success: function (data) {
-
         },
         complete: function (data) {
             console.log(data);
+            $('#successModal').modal('show');
+            clearInputs();
             showList();
         }
     });
+
+    function clearInputs() {
+        document.getElementById("name").value = "";
+        document.getElementById("birthday").value = "";
+        document.getElementById("location").value = "";
+        document.getElementById("experience").value = "";
+        document.getElementById("teamList").innerHTML = "";
+    }
+}
+
+function closeModal() {
+    $('#successModal').modal('hide');
 }
